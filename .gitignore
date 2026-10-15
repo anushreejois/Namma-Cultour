@@ -1,0 +1,17 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Node / Client
+client/node_modules/
+client/dist/
+
+# Python / Server
+server/venv/
+server/__pycache__/
+*.pyc
+
+# IDEs
+.vscode/
+.idea/
