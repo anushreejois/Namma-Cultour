@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page Theme Comparison Studio — Namma Cultour</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0c0a09;
+      color: #f5f5f4;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden bg-[#0c0a09] text-stone-100">
+
+  <!-- Top Studio Control Bar -->
+  <header class="h-16 border-b border-stone-800 bg-[#0c0a09]/95 backdrop-blur-xl px-4 sm:px-6 flex items-center justify-between gap-4 shrink-0 z-30">
+    <div class="flex items-center gap-3 shrink-0">
+      <div class="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold text-xs">
+        NC
+      </div>
+      <div>
+        <h1 class="text-xs sm:text-sm font-bold tracking-tight text-white flex items-center gap-2">
+          <span>Landing Page Theme Studio</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">5 Concepts</span>
+        </h1>
+        <p class="text-[11px] text-stone-400 hidden sm:block">Click any theme below to preview live without clutter</p>
+      </div>
+    </div>
+
+    <!-- Theme Tabs Switcher -->
+    <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+      <button 
+        onclick="switchTheme('theme-1-architectural.html', this)"
+        class="theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-100 text-stone-950 font-semibold shadow-sm"
+        data-title="Theme 1: Architectural Minimal"
+        data-desc="Spacious Monocle-style editorial journal with warm espresso noir and parchment. Single featured spotlight replaces cluttered text boxes."
+      >
+        1. Architectural Minimal
+      </button>
+
+      <button 
+        onclick="switchTheme('theme-2-sunlit-glass.html', this)"
+        class="theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800"
+        data-title="Theme 2: Sunlit Daylight Glass"
+        data-desc="Luminous Apple VisionOS daylight glassmorphism. Alabaster foundation with soft jacaranda and emerald refraction. Clean, airy and breathing room."
+      >
+        2. Sunlit Daylight Glass
+      </button>
+
+      <button 
+        onclick="switchTheme('theme-3-swiss-cartography.html', this)"
+        class="theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800"
+        data-title="Theme 3: Swiss Cartography"
+        data-desc="High-contrast technical Swiss modernism. Pure black with electric orange accents, architectural grid lines, and technical coordinate sectors."
+      >
+        3. Swiss Cartography
+      </button>
+
+      <button 
+        onclick="switchTheme('theme-4-botanical-canopy.html', this)"
+        class="theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800"
+        data-title="Theme 4: Botanical Canopy"
+        data-desc="Bengaluru Garden City heritage. Deep rain-forest moss night with crimson colonial brick accents and serene literary pacing."
+      >
+        4. Botanical Canopy
+      </button>
+
+      <button 
+        onclick="switchTheme('theme-5-luminescent-dark.html', this)"
+        class="theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800"
+        data-title="Theme 5: Luminescent Dark Glass"
+        data-desc="Refined dark glassmorphic slabs with prismatic edge glows. Deep obsidian foundation with fluid spatial cards."
+      >
+        5. Luminescent Dark Glass
+      </button>
+    </div>
+
+    <!-- Actions: Open full-screen in new tab & Responsive toggle -->
+    <div class="flex items-center gap-2 shrink-0">
+      <a 
+        id="fullscreen-link"
+        href="/themes/theme-1-architectural.html"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-3 py-1.5 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-800 text-xs font-mono text-stone-300 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5"
+        title="Open active theme full-screen in a new tab"
+      >
+        <span>Open Standalone &nearr;</span>
+      </a>
+
+      <a 
+        href="/#map"
+        class="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-semibold text-xs transition-colors cursor-pointer flex items-center gap-1"
+      >
+        <span>Live Map</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Context Sub-Bar (Explaining active theme's philosophy) -->
+  <div class="bg-stone-950 px-6 py-2 border-b border-stone-800/80 flex items-center justify-between text-xs font-mono text-stone-400 shrink-0">
+    <div class="flex items-center gap-3">
+      <span id="theme-title" class="text-white font-semibold font-sans">Theme 1: Architectural Minimal</span>
+      <span class="text-stone-600">•</span>
+      <span id="theme-desc" class="text-stone-400 font-sans truncate max-w-2xl">
+        Spacious Monocle-style editorial journal with warm espresso noir and parchment. Single featured spotlight replaces cluttered text boxes.
+      </span>
+    </div>
+    <div class="hidden md:flex items-center gap-2 text-stone-500 text-[11px]">
+      <span>Click any theme button above to switch</span>
+    </div>
+  </div>
+
+  <!-- Live Interactive Preview Iframe Canvas -->
+  <main class="flex-1 w-full h-full relative bg-black flex items-center justify-center p-2 sm:p-4">
+    <div id="preview-wrapper" class="w-full h-full rounded-2xl overflow-hidden border border-stone-800/80 shadow-2xl transition-all duration-300 bg-[#0c0a09]">
+      <iframe 
+        id="preview-iframe"
+        src="/themes/theme-1-architectural.html"
+        class="w-full h-full border-0"
+        title="Theme Preview"
+      ></iframe>
+    </div>
+  </main>
+
+  <script>
+    function switchTheme(url, button) {
+      // Update iframe source
+      const iframe = document.getElementById('preview-iframe');
+      iframe.src = '/themes/' + url;
+
+      // Update standalone link
+      document.getElementById('fullscreen-link').href = '/themes/' + url;
+
+      // Update active button styles
+      document.querySelectorAll('.theme-tab').forEach(tab => {
+        tab.className = 'theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800';
+      });
+      button.className = 'theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-100 text-stone-950 font-semibold shadow-sm';
+
+      // Update info banner
+      document.getElementById('theme-title').textContent = button.dataset.title;
+      document.getElementById('theme-desc').textContent = button.dataset.desc;
+    }
+  </script>
+
+</body>
+</html>

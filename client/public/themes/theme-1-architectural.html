@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme 1: Architectural Minimal — Namma Cultour</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0c0a09;
+      color: #f5f2eb;
+    }
+    .font-serif {
+      font-family: 'Playfair Display', serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-800 selection:text-white">
+
+  <!-- Subtle ambient background warmth -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute top-0 right-1/4 w-[600px] h-[500px] bg-amber-950/20 rounded-full blur-[140px]"></div>
+    <div class="absolute bottom-0 left-10 w-[500px] h-[400px] bg-stone-900/40 rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="relative z-10 max-w-6xl mx-auto w-full px-6 py-8 sm:py-12 flex-1 flex flex-col justify-between">
+    
+    <!-- Header -->
+    <header class="flex items-center justify-between pb-8 border-b border-stone-800/80">
+      <div class="flex items-center gap-4">
+        <div class="w-9 h-9 rounded-full bg-stone-900 border border-stone-800 flex items-center justify-center">
+          <span class="text-amber-500 text-xs font-serif italic font-bold">ನ</span>
+        </div>
+        <div>
+          <span class="font-serif text-lg font-bold tracking-tight text-stone-100">ನಮ್ಮ Cultour</span>
+          <span class="text-[10px] font-mono tracking-widest text-stone-500 uppercase ml-2">Vol. 01</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-xs font-mono text-stone-400">
+        <a href="#about" class="hover:text-stone-200 transition-colors">Manifesto</a>
+        <a href="#trail" class="hover:text-stone-200 transition-colors">Cubbon Loop</a>
+        <a href="#archives" class="hover:text-stone-200 transition-colors">36 Archives</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="/#map" class="px-4 py-2 rounded-full bg-stone-100 hover:bg-white text-stone-950 font-sans font-semibold text-xs tracking-wide transition-all shadow-lg hover:shadow-xl cursor-pointer">
+          Enter Interactive Map &rarr;
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Hero: Spacious & Uncluttered -->
+    <main class="py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      <!-- Left Column: Pure Editorial Focus -->
+      <div class="lg:col-span-7 space-y-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-stone-900/80 border border-stone-800 text-[11px] font-mono text-amber-500">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+          <span>BENGALURU CULTURAL CARTOGRAPHY</span>
+        </div>
+
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.15] text-stone-100 tracking-tight">
+          Where Bangalore’s <span class="italic font-normal text-amber-400">stories</span> quietly reside.
+        </h1>
+
+        <p class="text-sm sm:text-base text-stone-400 font-light leading-relaxed max-w-xl">
+          An independent architectural atlas of 35+ historic reading rooms, hidden courtyards, and modernist art galleries across Bengaluru—designed to be explored on foot.
+        </p>
+
+        <!-- Primary Action Island -->
+        <div class="pt-2 flex items-center gap-4 flex-wrap">
+          <a href="/#map" class="px-6 py-3.5 rounded-xl bg-stone-100 hover:bg-white text-stone-950 font-sans font-semibold text-sm transition-all shadow-xl hover:translate-y-[-1px] cursor-pointer flex items-center gap-2">
+            <span>Explore Live Map</span>
+            <span>&rarr;</span>
+          </a>
+          <button class="px-5 py-3.5 rounded-xl bg-stone-900/60 hover:bg-stone-900 border border-stone-800 text-stone-300 hover:text-stone-100 text-sm font-medium transition-all cursor-pointer">
+            The Cubbon 1.8km Loop
+          </button>
+        </div>
+
+        <!-- Minimalist Curator note -->
+        <div class="pt-6 border-t border-stone-900 flex items-center gap-8 text-xs font-mono text-stone-500">
+          <div><span class="text-stone-300 font-bold">36</span> Spaces</div>
+          <div><span class="text-stone-300 font-bold">1</span> Walking Trail</div>
+          <div><span class="text-stone-300 font-bold">100%</span> Free & Open</div>
+        </div>
+      </div>
+
+      <!-- Right Column: Single Spacious Featured Showcase (Not 5 small boxes!) -->
+      <div class="lg:col-span-5">
+        <div class="relative rounded-2xl bg-stone-900/60 border border-stone-800/80 p-6 sm:p-7 backdrop-blur-xl shadow-2xl hover:border-amber-600/40 transition-all duration-300 group">
+          
+          <div class="flex items-center justify-between mb-4 pb-3 border-b border-stone-800/60">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-amber-500/90 font-medium">Curator Spotlight</span>
+            <span class="text-[10px] font-mono text-stone-500">Est. 1915</span>
+          </div>
+
+          <div class="space-y-3">
+            <h3 class="font-serif text-2xl font-bold text-stone-100 group-hover:text-amber-200 transition-colors">
+              State Central Library
+            </h3>
+            <p class="text-xs text-amber-500/80 font-medium">
+              ಶೇಷಾದ್ರಿ ಅಯ್ಯರ್ ಸ್ಮಾರಕ ಗ್ರಂಥಾಲಯ
+            </p>
+            <p class="text-xs text-stone-400 leading-relaxed pt-1">
+              Centennial red-pompeian brick landmark surrounded by the Cubbon Park bamboo canopy. Houses over 300,000 rare dewan papers, colonial surveys, and regional literature archives.
+            </p>
+          </div>
+
+          <!-- Spot details preview row -->
+          <div class="mt-6 pt-4 border-t border-stone-800/60 grid grid-cols-2 gap-3 text-[11px] font-mono text-stone-400">
+            <div>
+              <span class="block text-stone-600 text-[10px] uppercase">Transit</span>
+              <span class="text-stone-300">Cubbon Park Metro</span>
+            </div>
+            <div>
+              <span class="block text-stone-600 text-[10px] uppercase">Admission</span>
+              <span class="text-stone-300">Free / Public Archive</span>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <a href="/#map" class="w-full py-2.5 rounded-lg bg-stone-800/80 hover:bg-stone-800 text-stone-200 hover:text-white text-xs font-medium flex items-center justify-center gap-2 border border-stone-700/60 transition-colors">
+              <span>View On Interactive Canvas</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="pt-8 border-t border-stone-900 flex items-center justify-between text-xs text-stone-500 font-mono">
+      <span>Bengaluru Heritage & Cultural Geography</span>
+      <span>Non-commercial civic project</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>

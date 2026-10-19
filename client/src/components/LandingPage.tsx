@@ -11,6 +11,7 @@ import {
   BookOpen,
   Palette,
   Landmark,
+  Sparkles,
 } from 'lucide-react';
 import type { FilterCategory } from '../types/spot';
 
@@ -88,11 +89,24 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
         {/* Right Action Buttons */}
         <div className="flex items-center gap-2 sm:gap-3">
+          <a
+            id="open-theme-studio-btn"
+            href="/themes/index.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 sm:px-3.5 py-1.5 rounded-full bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 text-amber-300 text-xs font-mono font-medium transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+            title="Preview 5 clean HTML themes"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden xs:inline">Theme Studio</span>
+            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-200">5 Themes</span>
+          </a>
+
           <button
             id="landing-submit-btn"
             type="button"
             onClick={onOpenAddSpot}
-            className="px-3.5 py-1.5 rounded-full bg-stone-900/90 hover:bg-stone-800 border border-stone-700/80 text-stone-300 hover:text-white text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+            className="hidden sm:flex px-3.5 py-1.5 rounded-full bg-stone-900/90 hover:bg-stone-800 border border-stone-700/80 text-stone-300 hover:text-white text-xs font-medium transition-all items-center gap-1.5 cursor-pointer shadow-sm"
           >
             <Plus className="w-3.5 h-3.5 text-amber-500" />
             <span>Submit a Landmark</span>

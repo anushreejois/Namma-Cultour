@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme 3: Swiss Cartography — Namma Cultour</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Syne:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #050505;
+      color: #ffffff;
+      background-image: 
+        linear-gradient(to right, #141414 1px, transparent 1px),
+        linear-gradient(to bottom, #141414 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .font-syne {
+      font-family: 'Syne', sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-orange-500 selection:text-black">
+
+  <div class="relative z-10 max-w-6xl mx-auto w-full px-6 py-8 flex-1 flex flex-col justify-between">
+    
+    <!-- Top Technical Coordinate Bar -->
+    <header class="border-b border-stone-800 pb-5">
+      <div class="flex items-center justify-between text-xs font-mono text-stone-400 flex-wrap gap-3">
+        <div class="flex items-center gap-3">
+          <span class="inline-block w-2.5 h-2.5 bg-orange-500"></span>
+          <span class="text-white font-bold tracking-wider font-syne text-sm uppercase">ನಮ್ಮ Cultour BLR</span>
+          <span class="text-stone-600">/</span>
+          <span>CIVIC CARTOGRAPHY</span>
+        </div>
+
+        <div class="hidden sm:flex items-center gap-6 text-[11px] text-stone-500 font-mono">
+          <span>LAT 12.9716° N</span>
+          <span>LNG 77.5946° E</span>
+          <span>ELEV 920M</span>
+        </div>
+
+        <div>
+          <a href="/#map" class="px-3.5 py-1.5 bg-white text-black font-mono font-bold text-xs uppercase hover:bg-orange-500 hover:text-white transition-colors cursor-pointer">
+            Launch Atlas [Enter]
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Architectural Split -->
+    <main class="py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Left Column: Big Typographic Statement -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="text-xs font-mono text-orange-500 uppercase tracking-widest flex items-center gap-2">
+          <span>[SURVEY NO. 01]</span>
+          <span class="h-px w-8 bg-orange-500"></span>
+          <span>BENGALURU CULTURAL REGISTRY</span>
+        </div>
+
+        <h1 class="font-syne text-4xl sm:text-6xl font-extrabold uppercase tracking-tight leading-[1.05] text-white">
+          A Technical Atlas of 36 Cultural Spaces.
+        </h1>
+
+        <p class="text-sm sm:text-base text-stone-400 font-normal leading-relaxed max-w-xl font-mono">
+          Uncommercial cartography indexing Bangalore's historic public archives, print workshops, independent art studios, and pedestrian botanical trails.
+        </p>
+
+        <div class="pt-4 flex items-center gap-4 flex-wrap font-mono">
+          <a href="/#map" class="px-6 py-3.5 bg-orange-500 hover:bg-orange-600 text-black font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2">
+            <span>Explore Map Canvas</span>
+            <span>&rarr;</span>
+          </a>
+          <button class="px-5 py-3.5 border border-stone-700 hover:border-white text-stone-300 hover:text-white text-xs uppercase tracking-wider transition-colors cursor-pointer">
+            View Cubbon Circuit
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Clean Technical Sectors Grid (No messy text boxes!) -->
+      <div class="lg:col-span-5 space-y-3 font-mono">
+        
+        <div class="p-5 border border-stone-800 bg-stone-950/80 hover:border-orange-500/80 transition-colors group cursor-pointer">
+          <div class="flex items-center justify-between text-[11px] text-stone-500 mb-1.5">
+            <span class="text-orange-500 font-bold">SECTOR A</span>
+            <span>1.8 KM LOOP</span>
+          </div>
+          <h3 class="font-syne font-bold text-base text-white group-hover:text-orange-400 transition-colors uppercase">
+            Cubbon Park Heritage Trail
+          </h3>
+          <p class="text-xs text-stone-400 mt-1 font-mono">
+            Attara Kacheri • Seshadri Iyer Memorial • Visvesvaraya Museum
+          </p>
+        </div>
+
+        <div class="p-5 border border-stone-800 bg-stone-950/80 hover:border-orange-500/80 transition-colors group cursor-pointer">
+          <div class="flex items-center justify-between text-[11px] text-stone-500 mb-1.5">
+            <span class="text-orange-500 font-bold">SECTOR B</span>
+            <span>14 STUDIOS</span>
+          </div>
+          <h3 class="font-syne font-bold text-base text-white group-hover:text-orange-400 transition-colors uppercase">
+            Independent Art Residencies
+          </h3>
+          <p class="text-xs text-stone-400 mt-1 font-mono">
+            1Shanthiroad • Courtyard Gallery • Chitrakala Parishath
+          </p>
+        </div>
+
+        <div class="p-5 border border-stone-800 bg-stone-950/80 hover:border-orange-500/80 transition-colors group cursor-pointer">
+          <div class="flex items-center justify-between text-[11px] text-stone-500 mb-1.5">
+            <span class="text-orange-500 font-bold">SECTOR C</span>
+            <span>11 ARCHIVES</span>
+          </div>
+          <h3 class="font-syne font-bold text-base text-white group-hover:text-orange-400 transition-colors uppercase">
+            Literary & Scientific Lore
+          </h3>
+          <p class="text-xs text-stone-400 mt-1 font-mono">
+            State Central Library • Mythic Society • NIMHANS Brain Museum
+          </p>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Technical Footer -->
+    <footer class="border-t border-stone-800 pt-5 flex items-center justify-between text-[11px] font-mono text-stone-500 flex-wrap gap-2">
+      <div>NAMMA CULTOUR • OPEN CIVIC INITIATIVE</div>
+      <div>BENGALURU URBAN CARTOGRAPHY • V1.0</div>
+    </footer>
+
+  </div>
+
+</body>
+</html>
