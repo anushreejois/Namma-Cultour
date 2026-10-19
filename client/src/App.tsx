@@ -9,7 +9,7 @@ import { SpotDrawer } from './components/SpotDrawer';
 import { AddSpotModal } from './components/AddSpotModal';
 import { LeafletMap } from './components/LeafletMap';
 import { CubbonTrailHUD, type TrailWaypoint } from './components/CubbonTrailHUD';
-import { LandingPage } from './components/LandingPage';
+import { LandingPage, type MapNavigationTarget } from './components/LandingPage';
 import {
   Compass,
   Plus,
@@ -361,16 +361,42 @@ export function App() {
 
   const useGoogleMaps = hasValidGoogleKey && isLoaded && !loadError;
 
+  const handleEnterMapFromLanding = useCallback(
+    (target?: MapNavigationTarget) => {
+      if (target?.cubbonTrail) {
+        setShowCubbonTrail(true);
+      }
+      if (target?.category) {
+        setActiveCategory(target.category);
+      }
+      if (target?.spotId) {
+        const found = spots.find(
+          (s) =>
+            s.id === target.spotId ||
+            s.name.toLowerCase().includes(target.spotId!.toLowerCase())
+        );
+        if (found) {
+          handleSpotSelect(found);
+        }
+      } else if (target?.neighborhood) {
+        const foundInNeighborhood = spots.find((s) =>
+          (s.neighborhood || '').toLowerCase().includes(target.neighborhood!.toLowerCase())
+        );
+        if (foundInNeighborhood) {
+          handleSpotSelect(foundInNeighborhood);
+        }
+      }
+      setViewMode('map');
+    },
+    [spots, handleSpotSelect]
+  );
+
   if (viewMode === 'landing') {
     return (
       <>
         <LandingPage
-          onEnterMap={() => setViewMode('map')}
+          onEnterMap={handleEnterMapFromLanding}
           onOpenAddSpot={() => setIsAddModalOpen(true)}
-          onStartCubbonTrail={() => {
-            setShowCubbonTrail(true);
-            setViewMode('map');
-          }}
           spotsCount={spots.length}
         />
         <AddSpotModal

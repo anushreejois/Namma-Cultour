@@ -132,12 +132,21 @@
 }
 
 /* Typography Classes */
+.font-serif,
+.font-editorial {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
 .font-display {
   font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+.font-sans {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 .font-mono {
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'JetBrains Mono', 'Roboto Mono', monospace;
 }
 
 /* Horizontal scrollbar removal for preview dock / lists */
