@@ -409,16 +409,16 @@ export function App() {
   }
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-[#020617] text-slate-100 flex flex-col font-sans select-none">
+    <div className="relative w-screen h-screen overflow-hidden bg-[#0c0a09] text-stone-100 flex flex-col font-sans select-none">
       <AmbientGlow />
 
       {/* 1. SINGLE COHESIVE FLOATING GLASS HEADER ISLAND (z-30) */}
-      <header className="fixed top-3 sm:top-4 inset-x-3 sm:inset-x-6 md:inset-x-8 z-30 max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3 bg-slate-900/90 backdrop-blur-2xl border border-white/12 shadow-2xl px-3 sm:px-4 py-2 rounded-2xl pointer-events-auto">
+      <header className="fixed top-3 sm:top-4 inset-x-3 sm:inset-x-6 md:inset-x-8 z-30 max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3 bg-[#0c0a09]/85 backdrop-blur-2xl border border-stone-800/80 shadow-[0_20px_50px_rgba(0,0,0,0.7)] ring-1 ring-white/5 px-3 sm:px-4 py-2 rounded-2xl pointer-events-auto">
         {/* Left: Brand Badge & Mobile Sidebar Trigger */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <button
             onClick={() => setIsSidebarOpenMobile(true)}
-            className="md:hidden p-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 cursor-pointer"
+            className="md:hidden p-1.5 rounded-xl bg-stone-900/80 hover:bg-stone-800 border border-stone-800 text-stone-300 hover:text-stone-100 transition-colors cursor-pointer"
             title="Open Directory"
           >
             <Menu className="w-4 h-4" />
@@ -428,10 +428,10 @@ export function App() {
           <button
             id="back-to-landing-btn"
             onClick={() => setViewMode('landing')}
-            className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 text-xs"
+            className="group p-1.5 rounded-xl bg-stone-900/80 hover:bg-stone-800 border border-stone-800 text-stone-300 hover:text-stone-100 transition-colors cursor-pointer flex items-center gap-1.5 text-xs"
             title="Return to Landing Page"
           >
-            <ArrowLeft className="w-3.5 h-3.5 text-cyan-400" />
+            <ArrowLeft className="w-3.5 h-3.5 text-stone-400 group-hover:text-amber-500 transition-colors" />
             <span className="hidden sm:inline font-medium">Home</span>
           </button>
 
@@ -440,14 +440,14 @@ export function App() {
             className="flex items-center gap-2 sm:gap-2.5 cursor-pointer hover:opacity-90 transition-opacity"
             title="Return to Landing Page"
           >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-cyan-500 via-sky-500 to-indigo-600 flex items-center justify-center shadow-md shadow-cyan-500/25 shrink-0">
-              <Compass className="w-4 h-4 text-slate-950" />
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-stone-900 border border-stone-800 flex items-center justify-center shadow-md shadow-black/50 shrink-0">
+              <Compass className="w-4 h-4 text-amber-500" />
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="font-display font-bold text-sm sm:text-base tracking-tight text-white whitespace-nowrap">
+              <span className="font-serif font-bold text-sm sm:text-base tracking-tight text-stone-100 whitespace-nowrap">
                 ನಮ್ಮ Cultour
               </span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 font-mono border border-cyan-500/30 font-semibold">
+              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-stone-900 text-stone-400 font-mono border border-stone-800 font-medium">
                 BLR
               </span>
             </div>
@@ -469,7 +469,7 @@ export function App() {
         {/* Right: Actions Group (Trail Toggle, Map Layer Toggle, Add Spot) */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* Vertical Divider */}
-          <div className="h-5 w-px bg-white/10 hidden sm:block mx-0.5" />
+          <div className="h-5 w-px bg-stone-800 hidden sm:block mx-0.5" />
 
           {/* Cubbon Cultural Trail Toggle */}
           <button
@@ -477,14 +477,14 @@ export function App() {
             onClick={handleToggleCubbonTrail}
             className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer border whitespace-nowrap active:scale-95 ${
               showCubbonTrail
-                ? 'bg-emerald-500/25 border-emerald-400 text-emerald-200 shadow-md shadow-emerald-950/40 ring-1 ring-emerald-400/40'
-                : 'bg-white/5 border-white/8 text-slate-300 hover:text-white hover:bg-white/10'
+                ? 'bg-emerald-950/60 border-emerald-700/60 text-emerald-300 shadow-md ring-1 ring-emerald-500/30'
+                : 'bg-stone-900/80 border-stone-800 text-stone-300 hover:text-stone-100 hover:bg-stone-800'
             }`}
             title="Toggle animated Cubbon Park pedestrian circuit"
           >
             <Route
               className={`w-3.5 h-3.5 ${
-                showCubbonTrail ? 'text-emerald-300 animate-pulse' : 'text-slate-400'
+                showCubbonTrail ? 'text-emerald-400 animate-pulse' : 'text-stone-400'
               }`}
             />
             <span>Cubbon Trail</span>
@@ -498,12 +498,12 @@ export function App() {
             onClick={() => setMapLayer(mapLayer === 'streets' ? 'satellite' : 'streets')}
             className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer border whitespace-nowrap ${
               mapLayer === 'satellite'
-                ? 'bg-sky-500/20 border-sky-400/50 text-sky-200 shadow-md shadow-sky-950/40'
-                : 'bg-white/5 border-white/8 text-slate-300 hover:text-white hover:bg-white/10'
+                ? 'bg-amber-950/60 border-amber-700/60 text-amber-200 shadow-md ring-1 ring-amber-600/30'
+                : 'bg-stone-900/80 border-stone-800 text-stone-300 hover:text-stone-100 hover:bg-stone-800'
             }`}
             title={`Switch map view (currently ${mapLayer === 'streets' ? 'OSM Streets' : 'Satellite Imagery'})`}
           >
-            <Layers className="w-3.5 h-3.5 text-cyan-400" />
+            <Layers className="w-3.5 h-3.5 text-amber-500" />
             <span className="hidden lg:inline capitalize">{mapLayer}</span>
           </button>
 
@@ -511,9 +511,9 @@ export function App() {
           <button
             id="add-spot-btn"
             onClick={() => setIsAddModalOpen(true)}
-            className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-400 hover:to-sky-400 text-slate-950 font-display font-semibold text-xs transition-all shadow-md shadow-cyan-500/25 flex items-center gap-1.5 cursor-pointer active:scale-95 whitespace-nowrap"
+            className="px-3 py-1.5 rounded-xl bg-stone-100 hover:bg-white text-stone-950 font-sans font-semibold text-xs transition-all shadow-md shadow-black/50 border border-white/20 flex items-center gap-1.5 cursor-pointer active:scale-95 whitespace-nowrap"
           >
-            <Plus className="w-3.5 h-3.5 shrink-0" />
+            <Plus className="w-3.5 h-3.5 shrink-0 text-stone-900" />
             <span className="hidden sm:inline">Add Spot</span>
           </button>
         </div>
