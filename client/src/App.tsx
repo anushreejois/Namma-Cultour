@@ -1,122 +1,545 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { GoogleMap, useJsApiLoader, MarkerF, PolylineF } from '@react-google-maps/api';
+import type { CulturalSpot, FilterCategory } from './types/spot';
+import { fetchSpots } from './services/api';
+import { AmbientGlow } from './components/AmbientGlow';
+import { CategoryPills } from './components/CategoryPills';
+import { SpotSidebar } from './components/SpotSidebar';
+import { SpotDrawer } from './components/SpotDrawer';
+import { AddSpotModal } from './components/AddSpotModal';
+import { LeafletMap } from './components/LeafletMap';
+import {
+  Compass,
+  Plus,
+  Menu,
+  Layers,
+  Route,
+  X,
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-function App() {
-  const [count, setCount] = useState(0)
+const MAP_CENTER = { lat: 12.9716, lng: 77.5946 }; // Cubbon Park / Bengaluru City Center
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+// Dark vector map stylers for Google Maps
+const DARK_MAP_STYLES: google.maps.MapTypeStyle[] = [
+  { elementType: 'geometry', stylers: [{ color: '#090d16' }] },
+  { elementType: 'labels.text.stroke', stylers: [{ color: '#090d16' }] },
+  { elementType: 'labels.text.fill', stylers: [{ color: '#74889c' }] },
+  {
+    featureType: 'administrative.locality',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: '#d5e1f0' }],
+  },
+  {
+    featureType: 'poi',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: '#94a3b8' }],
+  },
+  {
+    featureType: 'poi.park',
+    elementType: 'geometry',
+    stylers: [{ color: '#0c1f1f' }],
+  },
+  {
+    featureType: 'poi.park',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: '#34d399' }],
+  },
+  {
+    featureType: 'road',
+    elementType: 'geometry',
+    stylers: [{ color: '#162032' }],
+  },
+  {
+    featureType: 'road',
+    elementType: 'geometry.stroke',
+    stylers: [{ color: '#0d1424' }],
+  },
+  {
+    featureType: 'road',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: '#94a3b8' }],
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry',
+    stylers: [{ color: '#1e293b' }],
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry.stroke',
+    stylers: [{ color: '#0f172a' }],
+  },
+  {
+    featureType: 'transit',
+    elementType: 'geometry',
+    stylers: [{ color: '#1e1b4b' }],
+  },
+  {
+    featureType: 'transit.station',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: '#c084fc' }],
+  },
+  {
+    featureType: 'water',
+    elementType: 'geometry',
+    stylers: [{ color: '#041426' }],
+  },
+  {
+    featureType: 'water',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: '#38bdf8' }],
+  },
+];
 
-      <div className="ticks"></div>
+// Cubbon Loop coordinates for Google Maps Polyline (complete heritage circuit)
+const CUBBON_LOOP_GOOGLE_COORDS = [
+  { lat: 12.9754, lng: 77.5929 }, // State Central Library (Seshadri Iyer Memorial Hall)
+  { lat: 12.9772, lng: 77.5925 }, // High Court / Attara Kacheri
+  { lat: 12.9785, lng: 77.5920 }, // Vidhana Soudha South Gate
+  { lat: 12.9775, lng: 77.5948 }, // Victoria Statue & Bamboo Groves
+  { lat: 12.9753, lng: 77.5958 }, // Government Museum (1877)
+  { lat: 12.9752, lng: 77.5960 }, // Venkatappa Art Gallery
+  { lat: 12.9752, lng: 77.5963 }, // VITM
+  { lat: 12.9736, lng: 77.5945 }, // Cubbon Park Bandstand
+  { lat: 12.9744, lng: 77.5930 }, // King Edward VII Statue
+  { lat: 12.9754, lng: 77.5929 }, // Loop returns to State Central Library
+];
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+interface CategoryColorTheme {
+  border: string;
+  bgTint: string;
+  badge: string;
+  svgGlyph: string;
 }
 
-export default App
+function getCategoryColorTheme(category: string): CategoryColorTheme {
+  switch (category.toLowerCase()) {
+    case 'museum':
+      return {
+        border: '#f59e0b',
+        bgTint: '#fef3c7',
+        badge: '#b45309',
+        svgGlyph: `
+          <g fill="#b45309" stroke="#b45309" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="17,10 10.5,13.8 23.5,13.8" stroke-width="1.2"/>
+            <rect x="11" y="14.2" width="12" height="1.3" rx="0.4" stroke-width="0"/>
+            <rect x="12" y="16.2" width="1.6" height="5" rx="0.4" stroke-width="0"/>
+            <rect x="15.2" y="16.2" width="1.6" height="5" rx="0.4" stroke-width="0"/>
+            <rect x="18.4" y="16.2" width="1.6" height="5" rx="0.4" stroke-width="0"/>
+            <rect x="21.6" y="16.2" width="1.6" height="5" rx="0.4" stroke-width="0"/>
+            <rect x="10" y="21.8" width="14" height="1.5" rx="0.4" stroke-width="0"/>
+          </g>
+        `,
+      };
+    case 'gallery':
+      return {
+        border: '#c2410c', // Warm Terracotta / Bronze (NO pink!)
+        bgTint: '#ffedd5',
+        badge: '#9a3412',
+        svgGlyph: `
+          <g>
+            <path
+              d="M17 10C13 10 9.8 13.2 9.8 17.2c0 3 1.9 4.6 4 4.6 1 0 1.7-.5 2.2-1.2.4-.5.6-.6 1.1-.6.7 0 1.3.6 1.3 1.4 0 .3-.1.5-.2.8-.4 1.1.5 1.9 1.5 1.9 3.5 0 6.2-3.2 6.2-6.9C26 13.2 21.8 10 17 10Z"
+              fill="#9a3412"
+              fill-opacity="0.18"
+              stroke="#9a3412"
+              stroke-width="1.5"
+              stroke-linejoin="round"
+            />
+            <ellipse cx="17.8" cy="19.5" rx="1.2" ry="1" fill="#ffedd5" stroke="#9a3412" stroke-width="0.9"/>
+            <circle cx="13.2" cy="13.8" r="1.1" fill="#ef4444" />
+            <circle cx="16.8" cy="12.2" r="1.1" fill="#f59e0b" />
+            <circle cx="20.5" cy="13.8" r="1.1" fill="#3b82f6" />
+            <circle cx="22" cy="17" r="1.1" fill="#10b981" />
+          </g>
+        `,
+      };
+    case 'library':
+      return {
+        border: '#0284c7',
+        bgTint: '#e0f2fe',
+        badge: '#0369a1',
+        svgGlyph: `
+          <g stroke="#0369a1" stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M17 13.2C15.4 12 13.2 11.6 11.1 11.6a1 1 0 0 0-.9.9v7.8a.5.5 0 0 0 .5.5c1.9.2 4 .7 5.8 1.9 1.8-1.2 3.9-1.7 5.8-1.9a.5.5 0 0 0 .5-.5V12.5a1 1 0 0 0-.9-.9c-2.1 0-4.3.4-5.9 1.6Z"
+              fill="#0369a1"
+              fill-opacity="0.18"
+              stroke-width="1.5"
+            />
+            <line x1="17" y1="13.2" x2="17" y2="22.2" stroke-width="1.5" />
+          </g>
+        `,
+      };
+    default:
+      return {
+        border: '#06b6d4',
+        bgTint: '#cffafe',
+        badge: '#0e7490',
+        svgGlyph: `
+          <g stroke="#0e7490" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+            <path d="M17 23s-4.5-4-4.5-7.2a4.5 4.5 0 0 1 9 0c0 3.2-4.5 7.2-4.5 7.2Z" fill="#0e7490" fill-opacity="0.2"/>
+            <circle cx="17" cy="15.8" r="1.8" fill="#0e7490"/>
+          </g>
+        `,
+      };
+  }
+}
+
+function getMarkerIcon(category: string, isSelected: boolean): google.maps.Icon | string {
+  const theme = getCategoryColorTheme(category);
+  const size = isSelected ? 42 : 36;
+  const height = isSelected ? 52 : 46;
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${height}" viewBox="0 0 34 44">
+    <defs>
+      <filter id="pin-shadow" x="-30%" y="-30%" width="160%" height="160%">
+        <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#0f172a" flood-opacity="0.32"/>
+      </filter>
+    </defs>
+    <!-- Solid Modern White Teardrop Pin Body -->
+    <path filter="url(#pin-shadow)" d="M17 1 C8.163 1 1 8.163 1 17 C1 27 14 39.5 17 43 C20 39.5 33 27 33 17 C33 8.163 25.837 1 17 1 Z" fill="#ffffff" stroke="${theme.border}" stroke-width="2.4"/>
+    <!-- Subtle Inner Tint Circle -->
+    <circle cx="17" cy="17" r="12" fill="${theme.bgTint}"/>
+    <!-- Crisp Vector POI Glyph -->
+    ${theme.svgGlyph}
+  </svg>`;
+
+  return {
+    url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,
+    scaledSize: typeof google !== 'undefined' ? new google.maps.Size(size, height) : undefined,
+    anchor: typeof google !== 'undefined' ? new google.maps.Point(size / 2, height) : undefined,
+  };
+}
+
+export function App() {
+  const [spots, setSpots] = useState<CulturalSpot[]>([]);
+  const [activeCategory, setActiveCategory] = useState<FilterCategory>('all');
+  const [selectedSpot, setSelectedSpot] = useState<CulturalSpot | null>(null);
+  const [showCubbonTrail, setShowCubbonTrail] = useState(false);
+  const [mapLayer, setMapLayer] = useState<'streets' | 'satellite'>('streets');
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isSidebarOpenMobile, setIsSidebarOpenMobile] = useState(false);
+
+  const googleMapRef = useRef<google.maps.Map | null>(null);
+
+  const googleMapsApiKey = (import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '').trim();
+  const hasValidGoogleKey = Boolean(
+    googleMapsApiKey &&
+    !googleMapsApiKey.includes('placeholder') &&
+    googleMapsApiKey.startsWith('AIza')
+  );
+
+  const { isLoaded, loadError } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: hasValidGoogleKey ? googleMapsApiKey : '',
+  });
+
+  // Fetch spots on mount
+  const loadSpots = useCallback(async () => {
+    try {
+      const res = await fetchSpots();
+      setSpots(res.spots);
+    } catch (err) {
+      console.error('Failed to load spots', err);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadSpots();
+  }, [loadSpots]);
+
+  // Compute category counts
+  const categoryCounts = useMemo(() => {
+    const allCount = spots.length;
+    let museum = 0;
+    let gallery = 0;
+    let library = 0;
+
+    spots.forEach((s) => {
+      if (s.category === 'museum') museum++;
+      else if (s.category === 'gallery') gallery++;
+      else if (s.category === 'library') library++;
+    });
+
+    return {
+      all: allCount,
+      museum,
+      gallery,
+      library,
+    };
+  }, [spots]);
+
+  // Filtered spots for map pins
+  const filteredSpots = useMemo(() => {
+    if (activeCategory === 'all') return spots;
+    return spots.filter((s) => s.category.toLowerCase() === activeCategory.toLowerCase());
+  }, [spots, activeCategory]);
+
+  // Pan map when spot is selected
+  const handleSpotSelect = useCallback((spot: CulturalSpot) => {
+    setSelectedSpot(spot);
+    if (googleMapRef.current) {
+      googleMapRef.current.panTo({ lat: spot.lat, lng: spot.lng });
+      googleMapRef.current.setZoom(15);
+    }
+  }, []);
+
+  const handleToggleCubbonTrail = useCallback(() => {
+    setShowCubbonTrail((prev) => {
+      const next = !prev;
+      if (next) {
+        setSelectedSpot(null);
+        if (googleMapRef.current) {
+          googleMapRef.current.panTo({ lat: 12.9754, lng: 77.5945 });
+          googleMapRef.current.setZoom(16);
+        }
+      }
+      return next;
+    });
+  }, []);
+
+  const onGoogleMapLoad = useCallback((map: google.maps.Map) => {
+    googleMapRef.current = map;
+  }, []);
+
+  const onGoogleMapUnmount = useCallback(() => {
+    googleMapRef.current = null;
+  }, []);
+
+  const useGoogleMaps = hasValidGoogleKey && isLoaded && !loadError;
+
+  return (
+    <div className="relative w-screen h-screen overflow-hidden bg-[#020617] text-slate-100 flex flex-col font-sans select-none">
+      <AmbientGlow />
+
+      {/* 1. SINGLE COHESIVE FLOATING GLASS HEADER ISLAND (z-30) */}
+      <header className="fixed top-3 sm:top-4 inset-x-3 sm:inset-x-6 md:inset-x-8 z-30 max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3 bg-slate-900/90 backdrop-blur-2xl border border-white/12 shadow-2xl px-3 sm:px-4 py-2 rounded-2xl pointer-events-auto">
+        {/* Left: Brand Badge & Mobile Sidebar Trigger */}
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <button
+            onClick={() => setIsSidebarOpenMobile(true)}
+            className="md:hidden p-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 cursor-pointer"
+            title="Open Directory"
+          >
+            <Menu className="w-4 h-4" />
+          </button>
+
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-cyan-500 via-sky-500 to-indigo-600 flex items-center justify-center shadow-md shadow-cyan-500/25 shrink-0">
+              <Compass className="w-4 h-4 text-slate-950" />
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="font-display font-bold text-sm sm:text-base tracking-tight text-white whitespace-nowrap">
+                ನಮ್ಮ Cultour
+              </span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 font-mono border border-cyan-500/30 font-semibold">
+                BLR
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Center: Category Filter Tabs */}
+        <div className="hidden md:flex items-center justify-center flex-1 max-w-xl mx-2">
+          <CategoryPills
+            activeCategory={activeCategory}
+            onSelectCategory={(cat) => {
+              setActiveCategory(cat);
+              setSelectedSpot(null);
+            }}
+            counts={categoryCounts}
+          />
+        </div>
+
+        {/* Right: Actions Group (Trail Toggle, Map Layer Toggle, Add Spot) */}
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          {/* Vertical Divider */}
+          <div className="h-5 w-px bg-white/10 hidden sm:block mx-0.5" />
+
+          {/* Cubbon Cultural Trail Toggle */}
+          <button
+            id="cubbon-trail-toggle-btn"
+            onClick={handleToggleCubbonTrail}
+            className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer border whitespace-nowrap active:scale-95 ${
+              showCubbonTrail
+                ? 'bg-emerald-500/25 border-emerald-400 text-emerald-200 shadow-md shadow-emerald-950/40 ring-1 ring-emerald-400/40'
+                : 'bg-white/5 border-white/8 text-slate-300 hover:text-white hover:bg-white/10'
+            }`}
+            title="Toggle animated Cubbon Park pedestrian circuit"
+          >
+            <Route
+              className={`w-3.5 h-3.5 ${
+                showCubbonTrail ? 'text-emerald-300 animate-pulse' : 'text-slate-400'
+              }`}
+            />
+            <span>Cubbon Trail</span>
+            {showCubbonTrail && (
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping ml-0.5" />
+            )}
+          </button>
+
+          {/* Map Layer Toggle (Interactive Streets vs Satellite) */}
+          <button
+            onClick={() => setMapLayer(mapLayer === 'streets' ? 'satellite' : 'streets')}
+            className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer border whitespace-nowrap ${
+              mapLayer === 'satellite'
+                ? 'bg-sky-500/20 border-sky-400/50 text-sky-200 shadow-md shadow-sky-950/40'
+                : 'bg-white/5 border-white/8 text-slate-300 hover:text-white hover:bg-white/10'
+            }`}
+            title={`Switch map view (currently ${mapLayer === 'streets' ? 'OSM Streets' : 'Satellite Imagery'})`}
+          >
+            <Layers className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="hidden lg:inline capitalize">{mapLayer}</span>
+          </button>
+
+          {/* Add Spot Button */}
+          <button
+            onClick={() => setIsAddModalOpen(true)}
+            className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-400 hover:to-sky-400 text-slate-950 font-display font-semibold text-xs transition-all shadow-md shadow-cyan-500/25 flex items-center gap-1.5 cursor-pointer active:scale-95 whitespace-nowrap"
+          >
+            <Plus className="w-3.5 h-3.5 shrink-0" />
+            <span className="hidden sm:inline">Add Spot</span>
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile Secondary Category Bar */}
+      <div className="md:hidden fixed top-16 left-0 right-0 z-30 px-3 py-1 flex justify-center pointer-events-auto">
+        <CategoryPills
+          activeCategory={activeCategory}
+          onSelectCategory={(cat) => {
+            setActiveCategory(cat);
+            setSelectedSpot(null);
+          }}
+          counts={categoryCounts}
+        />
+      </div>
+
+      {/* 2. FULL-BLEED REAL MAP CANVAS (100vw x 100vh) */}
+      <main className="absolute inset-0 w-full h-full z-0 overflow-hidden">
+        {useGoogleMaps ? (
+          <GoogleMap
+            mapContainerStyle={{ width: '100%', height: '100%' }}
+            center={MAP_CENTER}
+            zoom={13}
+            onLoad={onGoogleMapLoad}
+            onUnmount={onGoogleMapUnmount}
+            options={{
+              styles: DARK_MAP_STYLES,
+              disableDefaultUI: true,
+              zoomControl: true,
+              zoomControlOptions: {
+                position: typeof google !== 'undefined' ? google.maps.ControlPosition.RIGHT_BOTTOM : 9,
+              },
+              backgroundColor: '#020617',
+              clickableIcons: false,
+              mapTypeId: mapLayer === 'satellite' ? 'hybrid' : 'roadmap',
+            }}
+          >
+            {filteredSpots.map((spot) => {
+              const isSelected = selectedSpot?.id === spot.id;
+              return (
+                <MarkerF
+                  key={spot.id}
+                  position={{ lat: spot.lat, lng: spot.lng }}
+                  onClick={() => handleSpotSelect(spot)}
+                  icon={getMarkerIcon(spot.category, isSelected)}
+                  title={spot.name}
+                  zIndex={isSelected ? 1000 : 1}
+                />
+              );
+            })}
+
+            {/* Cubbon Loop Polyline on Google Maps */}
+            {showCubbonTrail && (
+              <PolylineF
+                path={CUBBON_LOOP_GOOGLE_COORDS}
+                options={{
+                  strokeColor: '#10b981',
+                  strokeOpacity: 0.95,
+                  strokeWeight: 4,
+                }}
+              />
+            )}
+          </GoogleMap>
+        ) : (
+          /* Leaflet with Dynamic Cartography & Modern Teardrop Pins */
+          <LeafletMap
+            spots={filteredSpots}
+            selectedSpot={selectedSpot}
+            onSelectSpot={handleSpotSelect}
+            showCubbonTrail={showCubbonTrail}
+            mapLayer={mapLayer}
+          />
+        )}
+      </main>
+
+      {/* 3. LEFT FLOATING DIRECTORY SIDEBAR (z-20, top-20, below navbar) */}
+      <SpotSidebar
+        spots={spots}
+        selectedSpot={selectedSpot}
+        activeCategory={activeCategory}
+        onSelectSpot={handleSpotSelect}
+        isOpenMobile={isSidebarOpenMobile}
+        onCloseMobile={() => setIsSidebarOpenMobile(false)}
+      />
+
+      {/* 4. RIGHT FLOATING INSPECTION CARD (z-20, top-20, below navbar) */}
+      <SpotDrawer
+        spot={selectedSpot}
+        onClose={() => setSelectedSpot(null)}
+      />
+
+      {/* 4.5. FLOATING CUBBON TRAIL HUD BANNER */}
+      <AnimatePresence>
+        {showCubbonTrail && (
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 30, scale: 0.95 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-20 pointer-events-auto flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-slate-900/95 backdrop-blur-2xl border border-emerald-500/40 shadow-2xl shadow-emerald-950/60 max-w-lg w-[calc(100vw-2rem)] sm:w-auto"
+          >
+            <div className="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center shrink-0">
+              <Route className="w-5 h-5 text-emerald-400" />
+            </div>
+
+            <div className="flex-1 min-w-0 pr-2">
+              <div className="flex items-center gap-2">
+                <span className="font-display font-semibold text-xs sm:text-sm text-white tracking-wide">
+                  Cubbon Park Heritage Loop
+                </span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono font-bold border border-emerald-500/30">
+                  1.8 KM
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 truncate">
+                State Central Library ➔ Attara Kacheri ➔ Museum ➔ VITM ➔ Bandstand
+              </p>
+            </div>
+
+            <button
+              id="exit-cubbon-trail-btn"
+              onClick={() => setShowCubbonTrail(false)}
+              className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-white/10 transition-colors cursor-pointer shrink-0"
+              title="Close Cubbon Trail"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* 5. ADD SPOT MODAL */}
+      <AddSpotModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onSpotAdded={loadSpots}
+      />
+    </div>
+  );
+}
+
+export default App;
