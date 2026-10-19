@@ -396,6 +396,7 @@ export function App() {
 
           {/* Add Spot Button */}
           <button
+            id="add-spot-btn"
             onClick={() => setIsAddModalOpen(true)}
             className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-400 hover:to-sky-400 text-slate-950 font-display font-semibold text-xs transition-all shadow-md shadow-cyan-500/25 flex items-center gap-1.5 cursor-pointer active:scale-95 whitespace-nowrap"
           >
