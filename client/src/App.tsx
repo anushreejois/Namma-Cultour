@@ -8,15 +8,14 @@ import { SpotSidebar } from './components/SpotSidebar';
 import { SpotDrawer } from './components/SpotDrawer';
 import { AddSpotModal } from './components/AddSpotModal';
 import { LeafletMap } from './components/LeafletMap';
+import { CubbonTrailHUD, type TrailWaypoint } from './components/CubbonTrailHUD';
 import {
   Compass,
   Plus,
   Menu,
   Layers,
   Route,
-  X,
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const MAP_CENTER = { lat: 12.9716, lng: 77.5946 }; // Cubbon Park / Bengaluru City Center
 
@@ -278,6 +277,8 @@ export function App() {
   }, [spots, activeCategory]);
 
   // Pan map when spot is selected
+  const [activeWaypointId, setActiveWaypointId] = useState<string | null>(null);
+
   const handleSpotSelect = useCallback((spot: CulturalSpot) => {
     setSelectedSpot(spot);
     if (googleMapRef.current) {
@@ -286,15 +287,62 @@ export function App() {
     }
   }, []);
 
+  const handleSelectWaypoint = useCallback(
+    (waypoint: TrailWaypoint) => {
+      setActiveWaypointId(waypoint.id);
+
+      // Check if spot already exists in the dataset
+      const matched = spots.find(
+        (s) =>
+          s.id === waypoint.matchedSpotId ||
+          s.name.toLowerCase().includes(waypoint.name.toLowerCase().slice(0, 10))
+      );
+
+      if (matched) {
+        handleSpotSelect(matched);
+      } else {
+        // Virtual spot so inspection drawer opens with full heritage information
+        const virtualSpot: CulturalSpot = {
+          id: waypoint.id,
+          name: waypoint.name,
+          category: waypoint.category === 'landmark' ? 'museum' : waypoint.category,
+          subType: waypoint.subType,
+          lat: waypoint.lat,
+          lng: waypoint.lng,
+          tagline: waypoint.description,
+          neighborhood: 'Cubbon Park, Bengaluru',
+          nearestMetro: 'Cubbon Park Metro / Sir M. Visvesvaraya Metro',
+          entryFee: 'Free Heritage Landmark',
+          timings: '06:00 AM – 08:00 PM (Daily)',
+          status: 'verified',
+        };
+        handleSpotSelect(virtualSpot);
+      }
+    },
+    [spots, handleSpotSelect]
+  );
+
+  const handleRecenterTrail = useCallback(() => {
+    setSelectedSpot(null);
+    setActiveWaypointId(null);
+    if (googleMapRef.current) {
+      googleMapRef.current.panTo({ lat: 12.9754, lng: 77.5945 });
+      googleMapRef.current.setZoom(16);
+    }
+  }, []);
+
   const handleToggleCubbonTrail = useCallback(() => {
     setShowCubbonTrail((prev) => {
       const next = !prev;
       if (next) {
         setSelectedSpot(null);
+        setActiveWaypointId(null);
         if (googleMapRef.current) {
           googleMapRef.current.panTo({ lat: 12.9754, lng: 77.5945 });
           googleMapRef.current.setZoom(16);
         }
+      } else {
+        setActiveWaypointId(null);
       }
       return next;
     });
@@ -493,45 +541,17 @@ export function App() {
         onClose={() => setSelectedSpot(null)}
       />
 
-      {/* 4.5. FLOATING CUBBON TRAIL HUD BANNER */}
-      <AnimatePresence>
-        {showCubbonTrail && (
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 30, scale: 0.95 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-20 pointer-events-auto flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-slate-900/95 backdrop-blur-2xl border border-emerald-500/40 shadow-2xl shadow-emerald-950/60 max-w-lg w-[calc(100vw-2rem)] sm:w-auto"
-          >
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center shrink-0">
-              <Route className="w-5 h-5 text-emerald-400" />
-            </div>
-
-            <div className="flex-1 min-w-0 pr-2">
-              <div className="flex items-center gap-2">
-                <span className="font-display font-semibold text-xs sm:text-sm text-white tracking-wide">
-                  Cubbon Park Heritage Loop
-                </span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono font-bold border border-emerald-500/30">
-                  1.8 KM
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-300 truncate">
-                State Central Library ➔ Attara Kacheri ➔ Museum ➔ VITM ➔ Bandstand
-              </p>
-            </div>
-
-            <button
-              id="exit-cubbon-trail-btn"
-              onClick={() => setShowCubbonTrail(false)}
-              className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-white/10 transition-colors cursor-pointer shrink-0"
-              title="Close Cubbon Trail"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* 4.5. INTERACTIVE & CLICKABLE CUBBON TRAIL HUD */}
+      <CubbonTrailHUD
+        isVisible={showCubbonTrail}
+        onClose={() => {
+          setShowCubbonTrail(false);
+          setActiveWaypointId(null);
+        }}
+        onSelectWaypoint={handleSelectWaypoint}
+        onRecenterTrail={handleRecenterTrail}
+        activeWaypointId={activeWaypointId}
+      />
 
       {/* 5. ADD SPOT MODAL */}
       <AddSpotModal
