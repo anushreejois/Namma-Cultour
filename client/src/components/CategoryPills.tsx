@@ -26,29 +26,29 @@ const TABS: FilterTab[] = [
     id: 'all',
     label: 'All',
     icon: Sparkles,
-    activeColor: 'bg-slate-900/10 border-slate-900/20 text-slate-900 shadow-sm',
-    iconColor: 'text-indigo-600',
+    activeColor: 'bg-slate-700/80 border-slate-400/40 text-white',
+    iconColor: 'text-cyan-300',
   },
   {
     id: 'museum',
     label: 'Museums',
     icon: Landmark,
-    activeColor: 'bg-amber-500/15 border-amber-500/30 text-amber-800 shadow-sm',
-    iconColor: 'text-amber-600',
+    activeColor: 'bg-amber-500/20 border-amber-500/50 text-amber-300',
+    iconColor: 'text-amber-400',
   },
   {
     id: 'gallery',
     label: 'Art & Studios',
     icon: Palette,
-    activeColor: 'bg-indigo-500/15 border-indigo-500/30 text-indigo-800 shadow-sm',
-    iconColor: 'text-indigo-600',
+    activeColor: 'bg-sky-500/20 border-sky-400/50 text-sky-200',
+    iconColor: 'text-sky-400',
   },
   {
     id: 'library',
     label: 'Libraries',
     icon: BookOpen,
-    activeColor: 'bg-teal-500/15 border-teal-500/30 text-teal-800 shadow-sm',
-    iconColor: 'text-teal-600',
+    activeColor: 'bg-cyan-500/20 border-cyan-500/50 text-cyan-300',
+    iconColor: 'text-cyan-400',
   },
 ];
 
@@ -58,7 +58,7 @@ export const CategoryPills = ({
   counts,
 }: CategoryPillsProps) => {
   return (
-    <div className="bg-white/60 backdrop-blur-xl p-1 rounded-xl flex items-center gap-1 border border-white/80 shadow-sm overflow-x-auto no-scrollbar">
+    <div className="bg-slate-950/50 p-1 rounded-xl flex items-center gap-1 border border-white/8 overflow-x-auto no-scrollbar">
       {TABS.map((tab) => {
         const isActive = activeCategory === tab.id;
         const count = counts[tab.id];
@@ -69,13 +69,13 @@ export const CategoryPills = ({
             key={tab.id}
             onClick={() => onSelectCategory(tab.id)}
             className={`relative px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 whitespace-nowrap z-10 cursor-pointer ${
-              isActive ? 'text-slate-900 font-semibold' : 'text-slate-600 hover:text-slate-900'
+              isActive ? 'text-white font-semibold' : 'text-slate-400 hover:text-slate-200'
             }`}
           >
             {isActive && (
               <motion.div
                 layoutId="activeFilterPill"
-                className={`absolute inset-0 rounded-lg border ${tab.activeColor}`}
+                className={`absolute inset-0 rounded-lg border shadow-sm ${tab.activeColor}`}
                 transition={{
                   type: 'spring',
                   stiffness: 450,
@@ -84,13 +84,13 @@ export const CategoryPills = ({
                 style={{ zIndex: -1 }}
               />
             )}
-            <Icon className={`w-3.5 h-3.5 ${isActive ? tab.iconColor : 'text-slate-500'}`} />
+            <Icon className={`w-3.5 h-3.5 ${isActive ? tab.iconColor : 'text-slate-400'}`} />
             <span>{tab.label}</span>
             <span
               className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono transition-colors ${
                 isActive
-                  ? 'bg-white/80 text-slate-800 font-semibold shadow-xs'
-                  : 'bg-slate-200/60 text-slate-600'
+                  ? 'bg-white/20 text-white font-semibold'
+                  : 'bg-white/5 text-slate-400'
               }`}
             >
               {count}

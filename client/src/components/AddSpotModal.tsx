@@ -131,7 +131,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-slate-900/40 backdrop-blur-md"
+          className="fixed inset-0 bg-slate-950/80 backdrop-blur-md"
         />
 
         {/* Modal Window */}
@@ -140,19 +140,19 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ type: 'spring', stiffness: 350, damping: 26 }}
-          className="relative w-full max-w-lg rounded-2xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)] border border-white/90 ring-1 ring-slate-900/5 overflow-hidden z-10 max-h-[92vh] flex flex-col bg-white/90 backdrop-blur-2xl text-slate-800"
+          className="relative w-full max-w-lg glass-panel rounded-2xl shadow-2xl border border-white/15 overflow-hidden z-10 max-h-[92vh] flex flex-col bg-slate-900/95"
         >
           {/* Header */}
-          <div className="p-4 sm:p-5 border-b border-slate-200/80 flex items-center justify-between bg-white/60 shrink-0">
+          <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between bg-white/5 shrink-0">
             <div className="flex items-center gap-2.5">
-              <span className="p-2 rounded-xl bg-gradient-to-tr from-indigo-500/15 to-teal-500/15 text-indigo-600 border border-indigo-200/80">
+              <span className="p-2 rounded-xl bg-gradient-to-tr from-cyan-500/20 to-sky-500/20 text-cyan-400 border border-cyan-500/30">
                 <Sparkles className="w-5 h-5" />
               </span>
               <div>
-                <h3 className="font-display font-semibold text-base sm:text-lg text-slate-900">
+                <h3 className="font-display font-semibold text-base sm:text-lg text-white">
                   Add a Cultural Spot
                 </h3>
-                <p className="text-[11px] sm:text-xs text-slate-500">
+                <p className="text-[11px] sm:text-xs text-slate-400">
                   Community curation • No account required
                 </p>
               </div>
@@ -160,7 +160,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
             <button
               id="close-add-spot-modal-btn"
               onClick={onClose}
-              className="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors cursor-pointer border border-slate-200"
+              className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer border border-white/10"
               title="Close modal"
             >
               <X className="w-4 h-4" />
@@ -173,7 +173,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
               <motion.div
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2"
+                className="p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs flex items-center gap-2"
               >
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{errorMsg}</span>
@@ -184,19 +184,19 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
               <motion.div
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs flex items-center gap-2.5 shadow-sm"
+                className="p-3.5 rounded-xl bg-emerald-500/25 border border-emerald-400 text-emerald-200 text-xs flex items-center gap-2.5 shadow-lg shadow-emerald-950/40"
               >
-                <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-600" />
+                <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-400" />
                 <div>
                   <p className="font-semibold">{successMsg}</p>
-                  <p className="text-[10px] text-emerald-600/80">Updating live map and directory...</p>
+                  <p className="text-[10px] text-emerald-300/80">Updating live map and directory...</p>
                 </div>
               </motion.div>
             )}
 
             {/* Category Segmented Selector */}
             <div>
-              <label className="block text-xs font-mono text-slate-600 font-medium mb-1.5">
+              <label className="block text-xs font-mono text-slate-300 mb-1.5">
                 Category *
               </label>
               <div className="grid grid-cols-3 gap-2">
@@ -205,8 +205,8 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                   onClick={() => setCategory('museum')}
                   className={`py-2 px-2 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 border transition-all cursor-pointer ${
                     category === 'museum'
-                      ? 'bg-amber-500/15 border-amber-500/40 text-amber-900 shadow-sm ring-1 ring-amber-400/40'
-                      : 'bg-slate-100/70 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                      ? 'bg-amber-500/20 border-amber-400 text-amber-200 shadow-md shadow-amber-950/40 ring-1 ring-amber-400/30'
+                      : 'bg-slate-800/60 border-white/8 text-slate-400 hover:text-white hover:bg-slate-800'
                   }`}
                 >
                   <span>🏛️</span>
@@ -218,8 +218,8 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                   onClick={() => setCategory('gallery')}
                   className={`py-2 px-2 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 border transition-all cursor-pointer ${
                     category === 'gallery'
-                      ? 'bg-indigo-500/15 border-indigo-500/40 text-indigo-900 shadow-sm ring-1 ring-indigo-400/40'
-                      : 'bg-slate-100/70 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                      ? 'bg-orange-500/20 border-orange-400 text-orange-200 shadow-md shadow-orange-950/40 ring-1 ring-orange-400/30'
+                      : 'bg-slate-800/60 border-white/8 text-slate-400 hover:text-white hover:bg-slate-800'
                   }`}
                 >
                   <span>🎨</span>
@@ -231,8 +231,8 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                   onClick={() => setCategory('library')}
                   className={`py-2 px-2 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 border transition-all cursor-pointer ${
                     category === 'library'
-                      ? 'bg-teal-500/15 border-teal-500/40 text-teal-900 shadow-sm ring-1 ring-teal-400/40'
-                      : 'bg-slate-100/70 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                      ? 'bg-sky-500/20 border-sky-400 text-sky-200 shadow-md shadow-sky-950/40 ring-1 ring-sky-400/30'
+                      : 'bg-slate-800/60 border-white/8 text-slate-400 hover:text-white hover:bg-slate-800'
                   }`}
                 >
                   <span>📚</span>
@@ -243,7 +243,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
 
             {/* Spot Name */}
             <div>
-              <label htmlFor="spot-name-input" className="block text-xs font-mono text-slate-600 font-medium mb-1">
+              <label htmlFor="spot-name-input" className="block text-xs font-mono text-slate-300 mb-1">
                 Spot Name *
               </label>
               <input
@@ -253,14 +253,14 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. 1ShanthiRoad Studio"
-                className="w-full bg-slate-50 border border-slate-200/90 rounded-xl px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:bg-white"
+                className="w-full bg-slate-800/80 border border-white/10 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
               />
             </div>
 
             {/* Kannada Name & SubType */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label htmlFor="spot-kannada-input" className="block text-xs font-mono text-slate-600 font-medium mb-1">
+                <label htmlFor="spot-kannada-input" className="block text-xs font-mono text-slate-300 mb-1">
                   Kannada Name (Optional)
                 </label>
                 <input
@@ -269,12 +269,12 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                   value={kannadaName}
                   onChange={(e) => setKannadaName(e.target.value)}
                   placeholder="e.g. ಶಾಂತಿ ರೋಡ್ ಸ್ಟುಡಿಯೋ"
-                  className="w-full bg-slate-50 border border-slate-200/90 rounded-xl px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white"
+                  className="w-full bg-slate-800/80 border border-white/10 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
                 />
               </div>
 
               <div>
-                <label htmlFor="spot-subtype-input" className="block text-xs font-mono text-slate-600 font-medium mb-1">
+                <label htmlFor="spot-subtype-input" className="block text-xs font-mono text-slate-300 mb-1">
                   Sub-Type
                 </label>
                 <input
@@ -283,7 +283,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                   value={subType}
                   onChange={(e) => setSubType(e.target.value)}
                   placeholder="e.g. Contemporary Residency"
-                  className="w-full bg-slate-50 border border-slate-200/90 rounded-xl px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white"
+                  className="w-full bg-slate-800/80 border border-white/10 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
                 />
               </div>
             </div>
@@ -291,7 +291,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
             {/* Neighborhood & Nearest Metro */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label htmlFor="spot-neighborhood-input" className="block text-xs font-mono text-slate-600 font-medium mb-1">
+                <label htmlFor="spot-neighborhood-input" className="block text-xs font-mono text-slate-300 mb-1">
                   Neighborhood
                 </label>
                 <input
@@ -300,12 +300,12 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                   value={neighborhood}
                   onChange={(e) => setNeighborhood(e.target.value)}
                   placeholder="e.g. Shanthi Nagar"
-                  className="w-full bg-slate-50 border border-slate-200/90 rounded-xl px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white"
+                  className="w-full bg-slate-800/80 border border-white/10 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
                 />
               </div>
 
               <div>
-                <label htmlFor="spot-metro-input" className="block text-xs font-mono text-slate-600 font-medium mb-1">
+                <label htmlFor="spot-metro-input" className="block text-xs font-mono text-slate-300 mb-1">
                   Nearest Metro
                 </label>
                 <input
@@ -314,7 +314,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                   value={nearestMetro}
                   onChange={(e) => setNearestMetro(e.target.value)}
                   placeholder="e.g. MG Road Metro (1.2 km)"
-                  className="w-full bg-slate-50 border border-slate-200/90 rounded-xl px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white"
+                  className="w-full bg-slate-800/80 border border-white/10 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
                 />
               </div>
             </div>
@@ -322,7 +322,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
             {/* Entry Fee & Operational Timings */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label htmlFor="spot-fee-input" className="block text-xs font-mono text-slate-600 font-medium mb-1">
+                <label htmlFor="spot-fee-input" className="block text-xs font-mono text-slate-300 mb-1">
                   Entry Fee
                 </label>
                 <input
@@ -331,12 +331,12 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                   value={entryFee}
                   onChange={(e) => setEntryFee(e.target.value)}
                   placeholder="e.g. Free / ₹50"
-                  className="w-full bg-slate-50 border border-slate-200/90 rounded-xl px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white"
+                  className="w-full bg-slate-800/80 border border-white/10 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
                 />
               </div>
 
               <div>
-                <label htmlFor="spot-timings-input" className="block text-xs font-mono text-slate-600 font-medium mb-1">
+                <label htmlFor="spot-timings-input" className="block text-xs font-mono text-slate-300 mb-1">
                   Timings
                 </label>
                 <input
@@ -345,14 +345,14 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                   value={timings}
                   onChange={(e) => setTimings(e.target.value)}
                   placeholder="e.g. 10:00 AM – 06:30 PM"
-                  className="w-full bg-slate-50 border border-slate-200/90 rounded-xl px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white"
+                  className="w-full bg-slate-800/80 border border-white/10 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
                 />
               </div>
             </div>
 
             {/* Curator Tagline */}
             <div>
-              <label htmlFor="spot-tagline-input" className="block text-xs font-mono text-slate-600 font-medium mb-1">
+              <label htmlFor="spot-tagline-input" className="block text-xs font-mono text-slate-300 mb-1">
                 Curator Tagline / Description
               </label>
               <textarea
@@ -361,14 +361,14 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                 value={tagline}
                 onChange={(e) => setTagline(e.target.value)}
                 placeholder="What makes this place special for Bengaluru culture lovers?"
-                className="w-full bg-slate-50 border border-slate-200/90 rounded-xl px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:bg-white"
+                className="w-full bg-slate-800/80 border border-white/10 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400"
               />
             </div>
 
             {/* Geographic Coordinates with Helper */}
             <div>
               <div className="flex items-center justify-between mb-1">
-                <label className="block text-xs font-mono text-slate-600 font-medium">
+                <label className="block text-xs font-mono text-slate-300">
                   Coordinates (Lat, Lng) *
                 </label>
                 <div className="flex items-center gap-2">
@@ -378,7 +378,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                       setLat('12.9716');
                       setLng('77.5946');
                     }}
-                    className="text-[10px] text-indigo-600 hover:text-indigo-800 font-medium flex items-center gap-1 cursor-pointer"
+                    className="text-[10px] text-cyan-400 hover:text-cyan-300 flex items-center gap-1 cursor-pointer"
                   >
                     <MapPin className="w-3 h-3" />
                     <span>Cubbon Center</span>
@@ -387,7 +387,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                     type="button"
                     onClick={handleUseCurrentLocation}
                     disabled={isLocating}
-                    className="text-[10px] text-teal-600 hover:text-teal-800 font-medium flex items-center gap-1 cursor-pointer"
+                    className="text-[10px] text-sky-400 hover:text-sky-300 flex items-center gap-1 cursor-pointer"
                   >
                     <Locate className={`w-3 h-3 ${isLocating ? 'animate-spin' : ''}`} />
                     <span>{isLocating ? 'Locating...' : 'My Location'}</span>
@@ -403,7 +403,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                   value={lat}
                   onChange={(e) => setLat(e.target.value)}
                   placeholder="Latitude (e.g. 12.9716)"
-                  className="w-full bg-slate-50 border border-slate-200/90 rounded-xl px-3.5 py-2 text-sm text-slate-900 font-mono focus:outline-none focus:border-indigo-500 focus:bg-white"
+                  className="w-full bg-slate-800/80 border border-white/10 rounded-xl px-3.5 py-2 text-sm text-white font-mono focus:outline-none focus:border-cyan-400"
                 />
 
                 <input
@@ -413,7 +413,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                   value={lng}
                   onChange={(e) => setLng(e.target.value)}
                   placeholder="Longitude (e.g. 77.5946)"
-                  className="w-full bg-slate-50 border border-slate-200/90 rounded-xl px-3.5 py-2 text-sm text-slate-900 font-mono focus:outline-none focus:border-indigo-500 focus:bg-white"
+                  className="w-full bg-slate-800/80 border border-white/10 rounded-xl px-3.5 py-2 text-sm text-white font-mono focus:outline-none focus:border-cyan-400"
                 />
               </div>
             </div>
@@ -424,7 +424,7 @@ export const AddSpotModal: React.FC<AddSpotModalProps> = ({
                 id="spot-submit-button"
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-teal-500 hover:from-indigo-500 hover:to-teal-400 text-white font-display font-semibold shadow-lg shadow-indigo-500/25 transition-all cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2 active:scale-98"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-400 hover:to-sky-400 text-slate-950 font-display font-semibold shadow-lg shadow-cyan-500/20 transition-all cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2 active:scale-98"
               >
                 {isSubmitting ? (
                   <span>Submitting to Namma Cultour...</span>

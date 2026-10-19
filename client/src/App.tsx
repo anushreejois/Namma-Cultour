@@ -21,40 +21,75 @@ import {
 
 const MAP_CENTER = { lat: 12.9716, lng: 77.5946 }; // Cubbon Park / Bengaluru City Center
 
-// Daylight vector map stylers for Google Maps
-const DAYLIGHT_MAP_STYLES: google.maps.MapTypeStyle[] = [
-  { elementType: 'geometry', stylers: [{ color: '#f8fafc' }] },
-  { elementType: 'labels.text.fill', stylers: [{ color: '#475569' }] },
-  { elementType: 'labels.text.stroke', stylers: [{ color: '#ffffff' }] },
+// Dark vector map stylers for Google Maps
+const DARK_MAP_STYLES: google.maps.MapTypeStyle[] = [
+  { elementType: 'geometry', stylers: [{ color: '#090d16' }] },
+  { elementType: 'labels.text.stroke', stylers: [{ color: '#090d16' }] },
+  { elementType: 'labels.text.fill', stylers: [{ color: '#74889c' }] },
+  {
+    featureType: 'administrative.locality',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: '#d5e1f0' }],
+  },
+  {
+    featureType: 'poi',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: '#94a3b8' }],
+  },
   {
     featureType: 'poi.park',
     elementType: 'geometry',
-    stylers: [{ color: '#dcfce7' }],
+    stylers: [{ color: '#0c1f1f' }],
   },
   {
     featureType: 'poi.park',
     elementType: 'labels.text.fill',
-    stylers: [{ color: '#166534' }],
+    stylers: [{ color: '#34d399' }],
   },
   {
     featureType: 'road',
     elementType: 'geometry',
-    stylers: [{ color: '#ffffff' }],
+    stylers: [{ color: '#162032' }],
   },
   {
     featureType: 'road',
     elementType: 'geometry.stroke',
-    stylers: [{ color: '#e2e8f0' }],
+    stylers: [{ color: '#0d1424' }],
+  },
+  {
+    featureType: 'road',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: '#94a3b8' }],
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry',
+    stylers: [{ color: '#1e293b' }],
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry.stroke',
+    stylers: [{ color: '#0f172a' }],
+  },
+  {
+    featureType: 'transit',
+    elementType: 'geometry',
+    stylers: [{ color: '#1e1b4b' }],
+  },
+  {
+    featureType: 'transit.station',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: '#c084fc' }],
   },
   {
     featureType: 'water',
     elementType: 'geometry',
-    stylers: [{ color: '#e0f2fe' }],
+    stylers: [{ color: '#041426' }],
   },
   {
     featureType: 'water',
     elementType: 'labels.text.fill',
-    stylers: [{ color: '#0369a1' }],
+    stylers: [{ color: '#38bdf8' }],
   },
 ];
 
@@ -374,16 +409,16 @@ export function App() {
   }
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-[#f8fafc] text-slate-900 flex flex-col font-sans select-none">
+    <div className="relative w-screen h-screen overflow-hidden bg-[#020617] text-slate-100 flex flex-col font-sans select-none">
       <AmbientGlow />
 
       {/* 1. SINGLE COHESIVE FLOATING GLASS HEADER ISLAND (z-30) */}
-      <header className="fixed top-3 sm:top-4 inset-x-3 sm:inset-x-6 md:inset-x-8 z-30 max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3 bg-white/75 backdrop-blur-2xl border border-white/90 shadow-[0_12px_40px_-10px_rgba(15,23,42,0.08)] ring-1 ring-slate-900/5 px-3 sm:px-4 py-2 rounded-2xl pointer-events-auto">
+      <header className="fixed top-3 sm:top-4 inset-x-3 sm:inset-x-6 md:inset-x-8 z-30 max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-3 bg-slate-900/90 backdrop-blur-2xl border border-white/12 shadow-2xl px-3 sm:px-4 py-2 rounded-2xl pointer-events-auto">
         {/* Left: Brand Badge & Mobile Sidebar Trigger */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <button
             onClick={() => setIsSidebarOpenMobile(true)}
-            className="md:hidden p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 cursor-pointer"
+            className="md:hidden p-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 cursor-pointer"
             title="Open Directory"
           >
             <Menu className="w-4 h-4" />
@@ -393,11 +428,11 @@ export function App() {
           <button
             id="back-to-landing-btn"
             onClick={() => setViewMode('landing')}
-            className="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 hover:text-slate-950 transition-colors cursor-pointer flex items-center gap-1.5 text-xs font-medium"
+            className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 text-xs"
             title="Return to Landing Page"
           >
-            <ArrowLeft className="w-3.5 h-3.5 text-indigo-600" />
-            <span className="hidden sm:inline">Home</span>
+            <ArrowLeft className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="hidden sm:inline font-medium">Home</span>
           </button>
 
           <div
@@ -405,14 +440,14 @@ export function App() {
             className="flex items-center gap-2 sm:gap-2.5 cursor-pointer hover:opacity-90 transition-opacity"
             title="Return to Landing Page"
           >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-indigo-500 via-sky-500 to-teal-500 flex items-center justify-center shadow-md shadow-indigo-500/25 shrink-0">
-              <Compass className="w-4 h-4 text-white" />
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-cyan-500 via-sky-500 to-indigo-600 flex items-center justify-center shadow-md shadow-cyan-500/25 shrink-0">
+              <Compass className="w-4 h-4 text-slate-950" />
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="font-display font-bold text-sm sm:text-base tracking-tight text-slate-900 whitespace-nowrap">
+              <span className="font-display font-bold text-sm sm:text-base tracking-tight text-white whitespace-nowrap">
                 ನಮ್ಮ Cultour
               </span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-mono border border-indigo-200 font-semibold">
+              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 font-mono border border-cyan-500/30 font-semibold">
                 BLR
               </span>
             </div>
@@ -434,7 +469,7 @@ export function App() {
         {/* Right: Actions Group (Trail Toggle, Map Layer Toggle, Add Spot) */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* Vertical Divider */}
-          <div className="h-5 w-px bg-slate-200 hidden sm:block mx-0.5" />
+          <div className="h-5 w-px bg-white/10 hidden sm:block mx-0.5" />
 
           {/* Cubbon Cultural Trail Toggle */}
           <button
@@ -442,19 +477,19 @@ export function App() {
             onClick={handleToggleCubbonTrail}
             className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer border whitespace-nowrap active:scale-95 ${
               showCubbonTrail
-                ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-800 shadow-sm ring-1 ring-emerald-400/40'
-                : 'bg-slate-100 hover:bg-slate-200/80 border-slate-200 text-slate-700 hover:text-slate-950'
+                ? 'bg-emerald-500/25 border-emerald-400 text-emerald-200 shadow-md shadow-emerald-950/40 ring-1 ring-emerald-400/40'
+                : 'bg-white/5 border-white/8 text-slate-300 hover:text-white hover:bg-white/10'
             }`}
             title="Toggle animated Cubbon Park pedestrian circuit"
           >
             <Route
               className={`w-3.5 h-3.5 ${
-                showCubbonTrail ? 'text-emerald-600 animate-pulse' : 'text-slate-500'
+                showCubbonTrail ? 'text-emerald-300 animate-pulse' : 'text-slate-400'
               }`}
             />
             <span>Cubbon Trail</span>
             {showCubbonTrail && (
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping ml-0.5" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping ml-0.5" />
             )}
           </button>
 
@@ -463,12 +498,12 @@ export function App() {
             onClick={() => setMapLayer(mapLayer === 'streets' ? 'satellite' : 'streets')}
             className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer border whitespace-nowrap ${
               mapLayer === 'satellite'
-                ? 'bg-sky-500/15 border-sky-400/30 text-sky-800 shadow-sm'
-                : 'bg-slate-100 hover:bg-slate-200/80 border-slate-200 text-slate-700 hover:text-slate-950'
+                ? 'bg-sky-500/20 border-sky-400/50 text-sky-200 shadow-md shadow-sky-950/40'
+                : 'bg-white/5 border-white/8 text-slate-300 hover:text-white hover:bg-white/10'
             }`}
-            title={`Switch map view (currently ${mapLayer === 'streets' ? 'Voyager Streets' : 'Satellite Imagery'})`}
+            title={`Switch map view (currently ${mapLayer === 'streets' ? 'OSM Streets' : 'Satellite Imagery'})`}
           >
-            <Layers className="w-3.5 h-3.5 text-indigo-600" />
+            <Layers className="w-3.5 h-3.5 text-cyan-400" />
             <span className="hidden lg:inline capitalize">{mapLayer}</span>
           </button>
 
@@ -476,7 +511,7 @@ export function App() {
           <button
             id="add-spot-btn"
             onClick={() => setIsAddModalOpen(true)}
-            className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-teal-500 hover:from-indigo-500 hover:to-teal-400 text-white font-display font-semibold text-xs transition-all shadow-md shadow-indigo-500/25 flex items-center gap-1.5 cursor-pointer active:scale-95 whitespace-nowrap"
+            className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-400 hover:to-sky-400 text-slate-950 font-display font-semibold text-xs transition-all shadow-md shadow-cyan-500/25 flex items-center gap-1.5 cursor-pointer active:scale-95 whitespace-nowrap"
           >
             <Plus className="w-3.5 h-3.5 shrink-0" />
             <span className="hidden sm:inline">Add Spot</span>
@@ -506,13 +541,13 @@ export function App() {
             onLoad={onGoogleMapLoad}
             onUnmount={onGoogleMapUnmount}
             options={{
-              styles: DAYLIGHT_MAP_STYLES,
+              styles: DARK_MAP_STYLES,
               disableDefaultUI: true,
               zoomControl: true,
               zoomControlOptions: {
                 position: typeof google !== 'undefined' ? google.maps.ControlPosition.RIGHT_BOTTOM : 9,
               },
-              backgroundColor: '#f8fafc',
+              backgroundColor: '#020617',
               clickableIcons: false,
               mapTypeId: mapLayer === 'satellite' ? 'hybrid' : 'roadmap',
             }}

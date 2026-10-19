@@ -152,10 +152,10 @@ export const CubbonTrailHUD: React.FC<CubbonTrailHUDProps> = ({
         className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 pointer-events-auto max-w-2xl w-[calc(100vw-1.5rem)] sm:w-auto"
       >
         <div
-          className={`rounded-2xl bg-white/85 backdrop-blur-2xl border shadow-xl ring-1 ring-slate-900/5 transition-all duration-300 overflow-hidden ${
+          className={`rounded-2xl bg-slate-900/95 backdrop-blur-2xl border shadow-2xl transition-all duration-300 overflow-hidden ${
             isExpanded
-              ? 'border-emerald-500/50 shadow-emerald-500/10'
-              : 'border-emerald-500/30 shadow-slate-300/40 hover:border-emerald-400 hover:bg-white/95'
+              ? 'border-emerald-500/50 shadow-emerald-950/70'
+              : 'border-emerald-500/40 shadow-emerald-950/50 hover:border-emerald-400 hover:bg-slate-900/98'
           }`}
         >
           {/* Main Collapsed Header Bar (Clickable to toggle expansion) */}
@@ -166,24 +166,24 @@ export const CubbonTrailHUD: React.FC<CubbonTrailHUDProps> = ({
             title={isExpanded ? 'Collapse trail guide' : 'Click to open interactive 8-stop tour guide'}
           >
             {/* Emerald Icon */}
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-              <Route className="w-5 h-5 text-emerald-600 animate-pulse" />
+            <div className="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <Route className="w-5 h-5 text-emerald-400 animate-pulse" />
             </div>
 
             {/* Title & Badges */}
             <div className="flex-1 min-w-0 pr-1">
               <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
-                <span className="font-display font-semibold text-xs sm:text-sm text-slate-900 tracking-wide group-hover:text-emerald-700 transition-colors">
+                <span className="font-display font-semibold text-xs sm:text-sm text-white tracking-wide group-hover:text-emerald-300 transition-colors">
                   Cubbon Park Heritage Loop
                 </span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-mono font-bold border border-emerald-200">
+                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono font-bold border border-emerald-500/30">
                   1.8 KM
                 </span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-teal-50 text-teal-700 font-mono font-medium border border-teal-200 hidden xs:inline">
+                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 font-mono font-medium border border-cyan-500/25 hidden xs:inline">
                   8 STOPS
                 </span>
               </div>
-              <p className="text-[11px] text-slate-600 truncate mt-0.5">
+              <p className="text-[11px] text-slate-300 truncate mt-0.5">
                 State Central Library ➔ Attara Kacheri ➔ Museum ➔ VITM ➔ Bandstand
               </p>
             </div>
@@ -196,17 +196,17 @@ export const CubbonTrailHUD: React.FC<CubbonTrailHUDProps> = ({
                   e.stopPropagation();
                   setIsExpanded((prev) => !prev);
                 }}
-                className="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition-colors cursor-pointer flex items-center gap-1 text-xs"
+                className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer flex items-center gap-1 text-xs"
                 title={isExpanded ? 'Collapse' : 'Expand full itinerary'}
               >
                 {isExpanded ? (
-                  <ChevronDown className="w-4 h-4 text-emerald-600" />
+                  <ChevronDown className="w-4 h-4 text-emerald-400" />
                 ) : (
                   <>
-                    <span className="hidden sm:inline text-[11px] font-medium text-emerald-700">
+                    <span className="hidden sm:inline text-[11px] font-medium text-emerald-300">
                       Explore Stops
                     </span>
-                    <ChevronUp className="w-4 h-4 text-emerald-600 animate-bounce" />
+                    <ChevronUp className="w-4 h-4 text-emerald-400 animate-bounce" />
                   </>
                 )}
               </button>
@@ -218,7 +218,7 @@ export const CubbonTrailHUD: React.FC<CubbonTrailHUDProps> = ({
                   e.stopPropagation();
                   onClose();
                 }}
-                className="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 border border-slate-200 transition-colors cursor-pointer shrink-0"
+                className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border border-white/10 transition-colors cursor-pointer shrink-0"
                 title="Exit Cubbon Trail"
               >
                 <X className="w-4 h-4" />
@@ -234,17 +234,17 @@ export const CubbonTrailHUD: React.FC<CubbonTrailHUDProps> = ({
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.25, ease: 'easeInOut' }}
-                className="border-t border-slate-200/80 bg-slate-50/90 p-3.5 sm:p-4 space-y-3.5"
+                className="border-t border-white/10 bg-slate-950/70 p-3.5 sm:p-4 space-y-3.5"
               >
                 {/* Circuit Stats & Navigation Controls */}
-                <div className="flex items-center justify-between gap-2 flex-wrap pb-2 border-b border-slate-200/80">
-                  <div className="flex items-center gap-2 text-xs text-slate-600">
-                    <span className="flex items-center gap-1 text-emerald-700 font-semibold">
+                <div className="flex items-center justify-between gap-2 flex-wrap pb-2 border-b border-white/8">
+                  <div className="flex items-center gap-2 text-xs text-slate-300">
+                    <span className="flex items-center gap-1 text-emerald-400 font-medium">
                       <Clock className="w-3.5 h-3.5" />
                       ~25 Min Walk
                     </span>
-                    <span className="text-slate-300">•</span>
-                    <span className="text-slate-500">Pedestrian heritage circuit</span>
+                    <span className="text-white/20">•</span>
+                    <span className="text-slate-400">Pedestrian heritage circuit</span>
                   </div>
 
                   <div className="flex items-center gap-2">
@@ -252,10 +252,10 @@ export const CubbonTrailHUD: React.FC<CubbonTrailHUDProps> = ({
                     <button
                       type="button"
                       onClick={onRecenterTrail}
-                      className="px-2.5 py-1 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-[11px] font-medium text-slate-700 hover:text-slate-900 flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+                      className="px-2.5 py-1 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-medium text-slate-200 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
                       title="Center map camera on Cubbon Park"
                     >
-                      <Compass className="w-3.5 h-3.5 text-indigo-600" />
+                      <Compass className="w-3.5 h-3.5 text-cyan-400" />
                       <span>Re-center Loop</span>
                     </button>
 
@@ -264,7 +264,7 @@ export const CubbonTrailHUD: React.FC<CubbonTrailHUDProps> = ({
                       href={GOOGLE_MAPS_WALKING_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-2.5 py-1 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-medium text-[11px] flex items-center gap-1.5 shadow-md shadow-emerald-600/20 transition-all cursor-pointer"
+                      className="px-2.5 py-1 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-medium text-[11px] flex items-center gap-1.5 shadow-md shadow-emerald-950/40 transition-all cursor-pointer"
                       title="Open full pedestrian route in Google Maps navigation"
                     >
                       <Navigation className="w-3 h-3 text-white" />
@@ -276,7 +276,7 @@ export const CubbonTrailHUD: React.FC<CubbonTrailHUDProps> = ({
 
                 {/* Interactive Stop Grid (Click any stop to inspect on map) */}
                 <div>
-                  <p className="text-[10px] font-mono uppercase tracking-wider text-slate-500 mb-2 font-medium">
+                  <p className="text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-2">
                     Click any landmark below to fly camera & inspect details:
                   </p>
 
@@ -290,23 +290,23 @@ export const CubbonTrailHUD: React.FC<CubbonTrailHUDProps> = ({
                           onClick={() => onSelectWaypoint(stop)}
                           className={`text-left p-2.5 rounded-xl border transition-all flex items-start gap-2.5 cursor-pointer group/item ${
                             isActive
-                              ? 'bg-emerald-50 border-emerald-400 shadow-sm ring-1 ring-emerald-400/40 text-emerald-950'
-                              : 'bg-white/80 hover:bg-white border-slate-200/80 hover:border-slate-300 text-slate-800 shadow-xs'
+                              ? 'bg-emerald-500/20 border-emerald-400 shadow-md shadow-emerald-950/50 ring-1 ring-emerald-400/40'
+                              : 'bg-slate-900/80 hover:bg-slate-800 border-white/8 hover:border-white/20'
                           }`}
                         >
                           {/* Number Badge with Category Icon */}
-                          <div className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center shrink-0 text-xs font-mono font-bold text-slate-800 group-hover/item:bg-emerald-100 transition-colors">
+                          <div className="w-6 h-6 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-xs font-mono font-bold text-white group-hover/item:bg-emerald-500/30 transition-colors">
                             <span>{stop.iconEmoji}</span>
                           </div>
 
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between gap-1">
-                              <span className="font-display font-medium text-xs text-slate-900 truncate group-hover/item:text-emerald-700 transition-colors">
+                              <span className="font-display font-medium text-xs text-white truncate group-hover/item:text-emerald-300 transition-colors">
                                 {stop.number}. {stop.name}
                               </span>
-                              <MapPin className="w-3 h-3 text-slate-400 group-hover/item:text-emerald-600 shrink-0" />
+                              <MapPin className="w-3 h-3 text-slate-500 group-hover/item:text-emerald-400 shrink-0" />
                             </div>
-                            <p className="text-[10px] text-slate-500 truncate mt-0.5">
+                            <p className="text-[10px] text-slate-400 truncate mt-0.5">
                               {stop.subType}
                             </p>
                           </div>
