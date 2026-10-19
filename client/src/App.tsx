@@ -9,12 +9,14 @@ import { SpotDrawer } from './components/SpotDrawer';
 import { AddSpotModal } from './components/AddSpotModal';
 import { LeafletMap } from './components/LeafletMap';
 import { CubbonTrailHUD, type TrailWaypoint } from './components/CubbonTrailHUD';
+import { LandingPage } from './components/LandingPage';
 import {
   Compass,
   Plus,
   Menu,
   Layers,
   Route,
+  ArrowLeft,
 } from 'lucide-react';
 
 const MAP_CENTER = { lat: 12.9716, lng: 77.5946 }; // Cubbon Park / Bengaluru City Center
@@ -213,6 +215,7 @@ function getMarkerIcon(category: string, isSelected: boolean): google.maps.Icon 
 }
 
 export function App() {
+  const [viewMode, setViewMode] = useState<'landing' | 'map'>('landing');
   const [spots, setSpots] = useState<CulturalSpot[]>([]);
   const [activeCategory, setActiveCategory] = useState<FilterCategory>('all');
   const [selectedSpot, setSelectedSpot] = useState<CulturalSpot | null>(null);
@@ -358,6 +361,27 @@ export function App() {
 
   const useGoogleMaps = hasValidGoogleKey && isLoaded && !loadError;
 
+  if (viewMode === 'landing') {
+    return (
+      <>
+        <LandingPage
+          onEnterMap={() => setViewMode('map')}
+          onOpenAddSpot={() => setIsAddModalOpen(true)}
+          onStartCubbonTrail={() => {
+            setShowCubbonTrail(true);
+            setViewMode('map');
+          }}
+          spotsCount={spots.length}
+        />
+        <AddSpotModal
+          isOpen={isAddModalOpen}
+          onClose={() => setIsAddModalOpen(false)}
+          onSpotAdded={loadSpots}
+        />
+      </>
+    );
+  }
+
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-[#020617] text-slate-100 flex flex-col font-sans select-none">
       <AmbientGlow />
@@ -374,7 +398,22 @@ export function App() {
             <Menu className="w-4 h-4" />
           </button>
 
-          <div className="flex items-center gap-2 sm:gap-2.5">
+          {/* Return to Home / Landing Page Button */}
+          <button
+            id="back-to-landing-btn"
+            onClick={() => setViewMode('landing')}
+            className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 text-xs"
+            title="Return to Landing Page"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="hidden sm:inline font-medium">Home</span>
+          </button>
+
+          <div
+            onClick={() => setViewMode('landing')}
+            className="flex items-center gap-2 sm:gap-2.5 cursor-pointer hover:opacity-90 transition-opacity"
+            title="Return to Landing Page"
+          >
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-cyan-500 via-sky-500 to-indigo-600 flex items-center justify-center shadow-md shadow-cyan-500/25 shrink-0">
               <Compass className="w-4 h-4 text-slate-950" />
             </div>
