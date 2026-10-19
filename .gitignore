@@ -15,3 +15,7 @@ server/__pycache__/
 # IDEs
 .vscode/
 .idea/
+
+# Scratch & temporary assets
+scratch/
+scratch_*.png

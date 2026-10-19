@@ -218,6 +218,8 @@ export const LeafletMap = ({
   const tileLayerRef = useRef<L.TileLayer | null>(null);
   const markersLayerRef = useRef<L.LayerGroup | null>(null);
   const trailLayerRef = useRef<L.LayerGroup | null>(null);
+  const markersMapRef = useRef<Map<string, L.Marker>>(new Map());
+  const prevSelectedSpotIdRef = useRef<string | null>(null);
 
   // 1. Initialize Leaflet Map base instance
   useEffect(() => {
@@ -245,7 +247,7 @@ export const LeafletMap = ({
     };
   }, []);
 
-  // 2. Dynamic Tile Layer swapping (Streets vs. Satellite)
+  // 2. Dynamic Tile Layer swapping (Streets vs. Satellite) - Optimized for speed
   useEffect(() => {
     const map = mapInstanceRef.current;
     if (!map) return;
@@ -257,33 +259,41 @@ export const LeafletMap = ({
 
     const cartoKey = (import.meta.env.VITE_CARTO_API_KEY || '').trim();
 
-    let tileUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+    // Use {s} subdomains ('a', 'b', 'c') so browser parallelizes downloads over multiple connections
+    let tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    let subdomains = 'abc';
     let attribution = '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors';
 
     if (mapLayer === 'satellite') {
       tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+      subdomains = 'abc';
       attribution = '&copy; <a href="https://www.esri.com/" target="_blank" rel="noreferrer">Esri</a> World Imagery';
     } else if (cartoKey) {
       tileUrl = `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=${cartoKey}`;
+      subdomains = 'abcd';
       attribution = '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noreferrer">CARTO</a>';
     }
 
     const layer = L.tileLayer(tileUrl, {
+      subdomains,
       maxZoom: 19,
       attribution,
-      keepBuffer: 6,
+      keepBuffer: 2,           // Keep default buffer (avoids queuing 250+ simultaneous tile requests)
+      updateWhenIdle: true,     // Only fetch tiles after pan settles to prevent lag
+      updateWhenZooming: false, // Don't download intermediate zoom tiles during zoom animations
     }).addTo(map);
 
     tileLayerRef.current = layer;
   }, [mapLayer]);
 
-  // 2. Render Markers with depth-sorted zIndex to avoid visual clumping
+  // 3. Render Markers when spot list changes
   useEffect(() => {
     const map = mapInstanceRef.current;
     const markersLayer = markersLayerRef.current;
     if (!map || !markersLayer) return;
 
     markersLayer.clearLayers();
+    markersMapRef.current.clear();
 
     spots.forEach((spot) => {
       const isSelected = selectedSpot?.id === spot.id;
@@ -318,8 +328,40 @@ export const LeafletMap = ({
       );
 
       markersLayer.addLayer(marker);
+      markersMapRef.current.set(spot.id, marker);
     });
-  }, [spots, selectedSpot, onSelectSpot]);
+
+    prevSelectedSpotIdRef.current = selectedSpot?.id ?? null;
+  }, [spots, onSelectSpot]);
+
+  // 4. Instant Selection Diffing: Only update previous and newly selected marker icons
+  useEffect(() => {
+    const prevId = prevSelectedSpotIdRef.current;
+    const nextId = selectedSpot?.id ?? null;
+
+    if (prevId === nextId) return;
+
+    // Reset previous marker
+    if (prevId !== null) {
+      const prevMarker = markersMapRef.current.get(prevId);
+      const prevSpot = spots.find((s) => s.id === prevId);
+      if (prevMarker && prevSpot) {
+        prevMarker.setIcon(createMarkerIcon(prevSpot.category, false));
+        prevMarker.setZIndexOffset(Math.round((90 - prevSpot.lat) * 1000));
+      }
+    }
+
+    // Activate newly selected marker
+    if (nextId !== null && selectedSpot) {
+      const nextMarker = markersMapRef.current.get(nextId);
+      if (nextMarker) {
+        nextMarker.setIcon(createMarkerIcon(selectedSpot.category, true));
+        nextMarker.setZIndexOffset(10000);
+      }
+    }
+
+    prevSelectedSpotIdRef.current = nextId;
+  }, [selectedSpot, spots]);
 
   // 3. Pan / Fly to selected spot
   useEffect(() => {

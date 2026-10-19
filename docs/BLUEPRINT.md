@@ -249,7 +249,495 @@ def upgrade():
         sa.Column('entry_fee', sa.String(), nullable=True),
         sa.Column('timings', sa.String(), nullable=True),
         sa.Column('status', sa.String(), default='verified')
-    )
+    ) 
+    # 05 — DATABASE.md
+## Master Cultural Data Store (35 Curated Bengaluru Locations)
+
+### Schema Definition (`src/types/spot.ts`)
+```typescript
+export type Category = 'museum' | 'gallery' | 'library';
+
+export interface CulturalSpot {
+  id: string;
+  name: string;
+  category: Category;
+  subType: string;
+  lat: number;
+  lng: number;
+  tagline: string;
+  neighborhood: string;
+  nearestMetro: string;
+  entryFee: string;
+  timings: string;
+}
+export const CULTURAL_SPOTS: CulturalSpot[] = [
+  // ==========================================
+  // 1. MUSEUMS (11 SPOTS)
+  // ==========================================
+  {
+    id: 'vitm',
+    name: 'Visvesvaraya Industrial & Tech Museum',
+    category: 'museum',
+    subType: 'Science & Engineering',
+    lat: 12.9752,
+    lng: 77.5963,
+    tagline: 'Interactive mechanics, aerospace replicas, dynamic STEM exhibits and engine models.',
+    neighborhood: 'Kasturba Road',
+    nearestMetro: 'Cubbon Park Metro (550m)',
+    entryFee: '₹85',
+    timings: '09:30 AM – 06:00 PM'
+  },
+  {
+    id: 'hal-museum',
+    name: 'HAL Heritage Centre & Aerospace Museum',
+    category: 'museum',
+    subType: 'Aviation History',
+    lat: 12.9554,
+    lng: 77.6744,
+    tagline: 'Static aircraft yard featuring Marut, Kiran, MiG-21 fighters, and flight simulators.',
+    neighborhood: 'Old Airport Road',
+    nearestMetro: 'Indiranagar Metro (6 km)',
+    entryFee: '₹50',
+    timings: '09:00 AM – 05:00 PM'
+  },
+  {
+    id: 'gov-museum',
+    name: 'Government Museum',
+    category: 'museum',
+    subType: 'Archaeology & Antiquity',
+    lat: 12.9753,
+    lng: 77.5958,
+    tagline: 'One of India’s oldest museums, preserving historic sculpture and the ancient Halmidi inscription.',
+    neighborhood: 'Kasturba Road',
+    nearestMetro: 'Cubbon Park Metro (600m)',
+    entryFee: '₹20',
+    timings: '10:00 AM – 05:00 PM (Closed Mon)'
+  },
+  {
+    id: 'brain-museum',
+    name: 'NIMHANS Brain Museum',
+    category: 'museum',
+    subType: 'Neuroanatomy & Science',
+    lat: 12.9379,
+    lng: 77.5962,
+    tagline: 'Rare educational museum showcasing actual human brain specimens and neurological science.',
+    neighborhood: 'Hosur Road / Wilson Garden',
+    nearestMetro: 'South End Circle (2.2 km)',
+    entryFee: 'Free (Guided tours)',
+    timings: 'Guided sessions Wed (2-3pm) & Sat (10am-12pm)'
+  },
+  {
+    id: 'map-blr',
+    name: 'Museum of Art & Photography (MAP)',
+    category: 'museum',
+    subType: 'Modern Art & Heritage',
+    lat: 12.9734,
+    lng: 77.5971,
+    tagline: 'Modern five-story private museum housing classical art, textiles, and interactive galleries.',
+    neighborhood: 'Kasturba Road',
+    nearestMetro: 'Cubbon Park Metro (700m)',
+    entryFee: '₹150 (Galleries)',
+    timings: '10:00 AM – 06:30 PM (Closed Mon)'
+  },
+  {
+    id: 'ime-museum',
+    name: 'Indian Music Experience Museum (IME)',
+    category: 'museum',
+    subType: 'Music Heritage',
+    lat: 12.8931,
+    lng: 77.5852,
+    tagline: 'Interactive music museum featuring outdoor sound gardens, instrument displays, and indie history.',
+    neighborhood: 'JP Nagar 7th Phase',
+    nearestMetro: 'Yelachenahalli Metro (2.5 km)',
+    entryFee: '₹150',
+    timings: '10:00 AM – 06:00 PM (Closed Mon)'
+  },
+  {
+    id: 'planetarium',
+    name: 'Jawaharlal Nehru Planetarium',
+    category: 'museum',
+    subType: 'Space & Astronomy',
+    lat: 12.9849,
+    lng: 77.5896,
+    tagline: 'Sky theater with dome projections, solar observatories, and an interactive science playground.',
+    neighborhood: 'High Grounds',
+    nearestMetro: 'Vidhana Soudha Metro (1.2 km)',
+    entryFee: '₹75',
+    timings: '10:00 AM – 05:30 PM (Closed Mon)'
+  },
+  {
+    id: 'kempegowda-museum',
+    name: 'Kempegowda Museum',
+    category: 'museum',
+    subType: 'Civic History',
+    lat: 12.9739,
+    lng: 77.6094,
+    tagline: 'Historic collection celebrating Bengaluru’s founder inside the heritage Mayo Hall.',
+    neighborhood: 'MG Road',
+    nearestMetro: 'MG Road Metro (250m)',
+    entryFee: 'Free',
+    timings: '09:00 AM – 05:00 PM (Closed Sun)'
+  },
+  {
+    id: 'gandhi-bhavan',
+    name: 'Gandhi Bhavan Museum',
+    category: 'museum',
+    subType: 'National History',
+    lat: 12.9902,
+    lng: 77.5818,
+    tagline: 'Preserves rare photo archives, letters, and literature from Mahatma Gandhi’s Karnataka visits.',
+    neighborhood: 'Kumara Park East',
+    nearestMetro: 'Sampige Road Metro (1.5 km)',
+    entryFee: 'Free',
+    timings: '10:30 AM – 05:00 PM (Closed Sun)'
+  },
+  {
+    id: 'meg-museum',
+    name: 'Madras Sappers Military Heritage Museum',
+    category: 'museum',
+    subType: 'Military History',
+    lat: 12.9818,
+    lng: 77.6241,
+    tagline: 'Centuries of military history, weapons, and medals of the Madras Engineer Group.',
+    neighborhood: 'Ulsoor / MEG Centre',
+    nearestMetro: 'Halasuru Metro (1.1 km)',
+    entryFee: 'Free (Prior permission req.)',
+    timings: '10:00 AM – 04:00 PM'
+  },
+  {
+    id: 'janapada-hub',
+    name: 'Karnataka Folk Art Archive Hub',
+    category: 'museum',
+    subType: 'Folk Heritage',
+    lat: 12.9885,
+    lng: 77.5841,
+    tagline: 'Display of traditional Yakshagana headgear, folk musical instruments, and village masks.',
+    neighborhood: 'Kumara Krupa',
+    nearestMetro: 'Vidhana Soudha Metro (1.8 km)',
+    entryFee: 'Free',
+    timings: '10:00 AM – 05:00 PM'
+  },
+
+  // ==========================================
+  // 2. ART GALLERIES & HIDDEN STUDIOS (13 SPOTS)
+  // ==========================================
+  {
+    id: 'ngma',
+    name: 'National Gallery of Modern Art (NGMA)',
+    category: 'gallery',
+    subType: 'Modern & Contemporary Art',
+    lat: 12.9897,
+    lng: 77.5878,
+    tagline: 'Heritage Manikyavelu Mansion surrounded by serene sculpture gardens and master Indian canvases.',
+    neighborhood: 'Palace Road',
+    nearestMetro: 'Vidhana Soudha Metro (1.4 km)',
+    entryFee: '₹20',
+    timings: '10:00 AM – 06:00 PM (Closed Mon)'
+  },
+  {
+    id: 'venkatappa',
+    name: 'Venkatappa Art Gallery',
+    category: 'gallery',
+    subType: 'Fine Art & Modernist Works',
+    lat: 12.9752,
+    lng: 77.5960,
+    tagline: 'Celebrated public gallery preserving painter K. Venkatappa and K.K. Hebbar’s visual archives.',
+    neighborhood: 'Kasturba Road',
+    nearestMetro: 'Cubbon Park Metro (600m)',
+    entryFee: '₹20',
+    timings: '10:00 AM – 05:00 PM (Closed Mon)'
+  },
+  {
+    id: 'ckp',
+    name: 'Karnataka Chitrakala Parishath',
+    category: 'gallery',
+    subType: 'Fine Arts Complex',
+    lat: 12.9904,
+    lng: 77.5824,
+    tagline: 'Sprawling cultural center with 13 permanent galleries, Mysore paintings, and Roerich works.',
+    neighborhood: 'Kumara Krupa Road',
+    nearestMetro: 'Sampige Road Metro (1.6 km)',
+    entryFee: '₹50',
+    timings: '10:00 AM – 05:30 PM'
+  },
+  {
+    id: 'shanthiroad',
+    name: '1 Shanthiroad Studio Gallery',
+    category: 'gallery',
+    subType: 'Hidden Courtyard Studio',
+    lat: 12.9602,
+    lng: 77.5954,
+    tagline: 'Artist-run residency and open-courtyard gallery supporting experimental visual artwork.',
+    neighborhood: 'Shanthi Nagar',
+    nearestMetro: 'Lalbagh Metro (1.8 km)',
+    entryFee: 'Free',
+    timings: '11:00 AM – 07:00 PM'
+  },
+  {
+    id: 'the-courtyard',
+    name: 'The Courtyard Studio & Gallery',
+    category: 'gallery',
+    subType: 'Adaptive-Reuse Art Hub',
+    lat: 12.9578,
+    lng: 77.5941,
+    tagline: 'Intimate brick courtyard hosting indie photography retrospectives, installations, and cafe culture.',
+    neighborhood: 'Shanthi Nagar',
+    nearestMetro: 'Lalbagh Metro (1.2 km)',
+    entryFee: 'Free',
+    timings: '11:00 AM – 10:00 PM'
+  },
+  {
+    id: 'crimson-gallery',
+    name: 'Crimson Art Gallery',
+    category: 'gallery',
+    subType: 'Heritage Mansion Gallery',
+    lat: 12.9863,
+    lng: 77.5979,
+    tagline: 'Concealed inside the 120-year-old Hatworks Boulevard estate, curating fine lithographs and paintings.',
+    neighborhood: 'Cunningham Road',
+    nearestMetro: 'Cubbon Park Metro (1.3 km)',
+    entryFee: 'Free',
+    timings: '11:00 AM – 07:00 PM'
+  },
+  {
+    id: 'sublime-galleria',
+    name: 'Sublime Galleria',
+    category: 'gallery',
+    subType: 'Sky Bridge Gallery',
+    lat: 12.9719,
+    lng: 77.5958,
+    tagline: 'Suspended sky gallery on the 8th floor bridge of UB City, promoting contemporary artists.',
+    neighborhood: 'Vittal Mallya Road',
+    nearestMetro: 'Cubbon Park Metro (950m)',
+    entryFee: 'Free',
+    timings: '11:00 AM – 08:00 PM'
+  },
+  {
+    id: 'gallery-time-space',
+    name: 'Gallery Time & Space',
+    category: 'gallery',
+    subType: 'Townhouse Contemporary Art',
+    lat: 12.9712,
+    lng: 77.6001,
+    tagline: 'Tucked away along quiet Lavelle Road, exhibiting modern Indian bronze sculptures and paintings.',
+    neighborhood: 'Lavelle Road',
+    nearestMetro: 'MG Road Metro (900m)',
+    entryFee: 'Free',
+    timings: '11:00 AM – 07:00 PM'
+  },
+  {
+    id: 'kynkyny',
+    name: 'Kynkyny Art Gallery',
+    category: 'gallery',
+    subType: 'Second-Floor Art Den',
+    lat: 12.9827,
+    lng: 77.5998,
+    tagline: 'Upper-floor retreat above bustling Infantry Road highlighting emerging Indian painters.',
+    neighborhood: 'Infantry Road',
+    nearestMetro: 'Cubbon Park Metro (1 km)',
+    entryFee: 'Free',
+    timings: '10:00 AM – 07:00 PM'
+  },
+  {
+    id: 'galerie-de-arts',
+    name: 'Galerie De’Arts',
+    category: 'gallery',
+    subType: 'Heritage Art House',
+    lat: 13.0031,
+    lng: 77.5702,
+    tagline: 'Quiet Malleshwaram gallery spotlighting classical South Indian canvases and Tanjore revival works.',
+    neighborhood: 'Malleshwaram (11th Cross)',
+    nearestMetro: 'Sampige Road Metro (900m)',
+    entryFee: 'Free',
+    timings: '11:00 AM – 06:30 PM (Closed Sun)'
+  },
+  {
+    id: 'rangoli-metro',
+    name: 'Rangoli Metro Art Center',
+    category: 'gallery',
+    subType: 'Public Visual Promenade',
+    lat: 12.9744,
+    lng: 77.6083,
+    tagline: 'Vibrant urban cultural deck with three galleries (Vismaya, Chaya, Belaku) alongside MG Road.',
+    neighborhood: 'MG Road Boulevard',
+    nearestMetro: 'MG Road Metro (Direct Access)',
+    entryFee: 'Free',
+    timings: '10:00 AM – 07:30 PM'
+  },
+  {
+    id: 'tasveer',
+    name: 'Tasveer Gallery',
+    category: 'gallery',
+    subType: 'Photography Gallery',
+    lat: 12.9730,
+    lng: 77.5992,
+    tagline: 'Intimate visual space committed to fine-art photography and classic photojournalism portfolios.',
+    neighborhood: 'Kasturba Cross Road',
+    nearestMetro: 'Cubbon Park Metro (800m)',
+    entryFee: 'Free',
+    timings: '11:00 AM – 06:00 PM'
+  },
+  {
+    id: 'sphoorthi-studio',
+    name: 'Sphoorthi Theatre & Art Studio',
+    category: 'gallery',
+    subType: 'Grassroots Folk Studio',
+    lat: 12.9124,
+    lng: 77.5898,
+    tagline: 'Hidden South Bangalore creative enclave blending visual folklore, puppetry archives, and workshops.',
+    neighborhood: 'JP Nagar 2nd Phase',
+    nearestMetro: 'Banashankari Metro (1.4 km)',
+    entryFee: 'Free (Workshops ticketed)',
+    timings: '10:00 AM – 06:00 PM'
+  },
+
+  // ==========================================
+  // 3. LIBRARIES & ARCHIVES (11 SPOTS)
+  // ==========================================
+  {
+    id: 'scl',
+    name: 'State Central Library (Seshadri Iyer Memorial)',
+    category: 'library',
+    subType: 'Historic Flagship Archive',
+    lat: 12.9754,
+    lng: 77.5929,
+    tagline: 'Iconic crimson heritage landmark inside Cubbon Park with over 300,000 reference volumes.',
+    neighborhood: 'Cubbon Park',
+    nearestMetro: 'Cubbon Park Metro (400m)',
+    entryFee: 'Free',
+    timings: '08:30 AM – 07:30 PM (Closed Mon)'
+  },
+  {
+    id: 'iiwc',
+    name: 'Indian Institute of World Culture (IIWC)',
+    category: 'library',
+    subType: 'Public Reading Room & Culture',
+    lat: 12.9438,
+    lng: 77.5739,
+    tagline: 'Revered Basavanagudi cultural institution with a quiet sanctum for philosophy and world literature.',
+    neighborhood: 'Basavanagudi',
+    nearestMetro: 'National College Metro (850m)',
+    entryFee: 'Free (Membership for borrow)',
+    timings: '09:00 AM – 07:00 PM (Closed Mon)'
+  },
+  {
+    id: 'mythic-society',
+    name: 'The Mythic Society Library',
+    category: 'library',
+    subType: 'Indological & Historical Research',
+    lat: 12.9731,
+    lng: 77.5872,
+    tagline: 'Founded in 1909; holds over 40,000 rare books, palm-leaf manuscripts, and historical journals.',
+    neighborhood: 'Nrupathunga Road',
+    nearestMetro: 'Sir M. Visvesvaraya Metro (650m)',
+    entryFee: 'Free (Research access)',
+    timings: '10:00 AM – 05:00 PM (Closed Mon)'
+  },
+  {
+    id: 'ccl-jayanagar',
+    name: 'City Central Library (South Zone)',
+    category: 'library',
+    subType: 'Public Lending Library',
+    lat: 12.9304,
+    lng: 77.5819,
+    tagline: 'Thriving public reading room and regional literature repository serving South Bangalore.',
+    neighborhood: 'Jayanagar 3rd Block',
+    nearestMetro: 'Jayanagar Metro (450m)',
+    entryFee: 'Free',
+    timings: '08:30 AM – 07:30 PM (Closed Mon)'
+  },
+  {
+    id: 'ccl-malleshwaram',
+    name: 'City Central Library (West Zone)',
+    category: 'library',
+    subType: 'Neighborhood Public Library',
+    lat: 12.9996,
+    lng: 77.5714,
+    tagline: 'Historic public reading room with extensive Kannada language periodicals and classical collections.',
+    neighborhood: 'Malleshwaram',
+    nearestMetro: 'Srirampura Metro (1.1 km)',
+    entryFee: 'Free',
+    timings: '08:30 AM – 07:30 PM (Closed Mon)'
+  },
+  {
+    id: 'eloor-library',
+    name: 'Eloor Lending Library',
+    category: 'library',
+    subType: 'Heritage Lending Library',
+    lat: 12.9814,
+    lng: 77.6015,
+    tagline: 'Legendary multi-decade commercial lending library renowned for its curated fiction catalog.',
+    neighborhood: 'Infantry Road',
+    nearestMetro: 'Cubbon Park Metro (750m)',
+    entryFee: 'Refundable Deposit',
+    timings: '10:00 AM – 06:30 PM'
+  },
+  {
+    id: 'goethe-library',
+    name: 'Goethe-Institut / Max Mueller Bhavan Library',
+    category: 'library',
+    subType: 'International Cultural Archive',
+    lat: 12.9791,
+    lng: 77.6412,
+    tagline: 'Contemporary cultural library holding German literature, translated volumes, and modern media.',
+    neighborhood: 'Indiranagar',
+    nearestMetro: 'Indiranagar Metro (400m)',
+    entryFee: 'Free Entry',
+    timings: '09:30 AM – 06:00 PM (Closed Sun)'
+  },
+  {
+    id: 'alliance-francaise',
+    name: 'Alliance Française de Bangalore Library',
+    category: 'library',
+    subType: 'French Cultural Library',
+    lat: 12.9928,
+    lng: 77.5948,
+    tagline: 'French language novels, graphic novels, periodicals, and rich audiovisual collection.',
+    neighborhood: 'Vasanth Nagar',
+    nearestMetro: 'Cantonment / Vidhana Soudha (1.8 km)',
+    entryFee: 'Free Access / Membership',
+    timings: '09:00 AM – 06:00 PM (Closed Sun)'
+  },
+  {
+    id: 'bu-library',
+    name: 'Bangalore University Central Library',
+    category: 'library',
+    subType: 'Academic Research Archive',
+    lat: 12.9461,
+    lng: 77.5089,
+    tagline: 'University repository preserving scholarly doctoral dissertations, research papers, and journals.',
+    neighborhood: 'Jnana Bharathi Campus',
+    nearestMetro: 'Jnana Bharati Metro (500m)',
+    entryFee: 'Student ID / Permission',
+    timings: '09:00 AM – 06:00 PM'
+  },
+  {
+    id: 'atta-galatta',
+    name: 'Atta Galatta Literary Space',
+    category: 'library',
+    subType: 'Bookstore & Cultural Salon',
+    lat: 12.9749,
+    lng: 77.6433,
+    tagline: 'Independent bookstore and cultural salon celebrating regional Indian writing and poetry readings.',
+    neighborhood: 'Indiranagar',
+    nearestMetro: 'Indiranagar Metro (600m)',
+    entryFee: 'Free',
+    timings: '11:00 AM – 08:00 PM (Closed Mon)'
+  },
+  {
+    id: 'champaca',
+    name: 'Champaca Bookstore & Reading Cafe',
+    category: 'library',
+    subType: 'Independent Reading Room',
+    lat: 12.9908,
+    lng: 77.5937,
+    tagline: 'Canopy-sheltered quiet reading room curating feminist literature, translated memoirs, and indie presses.',
+    neighborhood: 'Vasanth Nagar',
+    nearestMetro: 'Vidhana Soudha Metro (1.7 km)',
+    entryFee: 'Free Entry',
+    timings: '10:30 AM – 07:00 PM (Closed Mon)'
+  }
+];
 06 — API.mdExternal & Routing Contracts1. Google Directions Service Call
 Function: google.maps.DirectionsService.route()
 Mode: google.maps.TravelMode.WALKING
