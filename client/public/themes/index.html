@@ -39,8 +39,18 @@
     <!-- Theme Tabs Switcher -->
     <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
       <button 
+        onclick="switchTheme('theme-curated-showcase.html', this)"
+        class="theme-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap bg-amber-500 text-stone-950 shadow-md ring-1 ring-amber-400/50 flex items-center gap-1.5"
+        data-title="✨ Premier: Curated Cultural Showcase (Recommended)"
+        data-desc="Rich, cinematic architectural photography of Seshadri Iyer Memorial Library & Shanthi Nagar studios with interactive 3-category switcher and Cubbon loop trail ribbon. Neither simple nor cluttered."
+      >
+        <span>✨ Curated Showcase</span>
+        <span class="text-[10px] px-1 py-0.2 rounded bg-black/20 font-bold">New</span>
+      </button>
+
+      <button 
         onclick="switchTheme('theme-1-architectural.html', this)"
-        class="theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-100 text-stone-950 font-semibold shadow-sm"
+        class="theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800"
         data-title="Theme 1: Architectural Minimal"
         data-desc="Spacious Monocle-style editorial journal with warm espresso noir and parchment. Single featured spotlight replaces cluttered text boxes."
       >
@@ -88,7 +98,7 @@
     <div class="flex items-center gap-2 shrink-0">
       <a 
         id="fullscreen-link"
-        href="/themes/theme-1-architectural.html"
+        href="/themes/theme-curated-showcase.html"
         target="_blank"
         rel="noopener noreferrer"
         class="px-3 py-1.5 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-800 text-xs font-mono text-stone-300 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5"
@@ -99,7 +109,7 @@
 
       <a 
         href="/#map"
-        class="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-semibold text-xs transition-colors cursor-pointer flex items-center gap-1"
+        class="px-3.5 py-1.5 rounded-xl bg-stone-100 hover:bg-white text-stone-950 font-semibold text-xs transition-colors cursor-pointer flex items-center gap-1"
       >
         <span>Live Map</span>
       </a>
@@ -109,10 +119,10 @@
   <!-- Context Sub-Bar (Explaining active theme's philosophy) -->
   <div class="bg-stone-950 px-6 py-2 border-b border-stone-800/80 flex items-center justify-between text-xs font-mono text-stone-400 shrink-0">
     <div class="flex items-center gap-3">
-      <span id="theme-title" class="text-white font-semibold font-sans">Theme 1: Architectural Minimal</span>
+      <span id="theme-title" class="text-white font-semibold font-sans">✨ Premier: Curated Cultural Showcase</span>
       <span class="text-stone-600">•</span>
       <span id="theme-desc" class="text-stone-400 font-sans truncate max-w-2xl">
-        Spacious Monocle-style editorial journal with warm espresso noir and parchment. Single featured spotlight replaces cluttered text boxes.
+        Rich, cinematic architectural photography of Seshadri Iyer Memorial Library & Shanthi Nagar studios with interactive 3-category switcher and Cubbon loop trail ribbon.
       </span>
     </div>
     <div class="hidden md:flex items-center gap-2 text-stone-500 text-[11px]">
@@ -125,7 +135,7 @@
     <div id="preview-wrapper" class="w-full h-full rounded-2xl overflow-hidden border border-stone-800/80 shadow-2xl transition-all duration-300 bg-[#0c0a09]">
       <iframe 
         id="preview-iframe"
-        src="/themes/theme-1-architectural.html"
+        src="/themes/theme-curated-showcase.html"
         class="w-full h-full border-0"
         title="Theme Preview"
       ></iframe>
