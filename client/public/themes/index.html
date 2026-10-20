@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing Page Theme Comparison Studio — Namma Cultour</title>
+  <title>Landing Page Glassmorphic Studio — Namma Cultour</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #0c0a09;
+      background-color: #070605;
       color: #f5f5f4;
     }
     .font-mono {
@@ -19,90 +19,92 @@
     }
   </style>
 </head>
-<body class="h-screen flex flex-col overflow-hidden bg-[#0c0a09] text-stone-100">
+<body class="h-screen flex flex-col overflow-hidden bg-[#070605] text-stone-100">
 
   <!-- Top Studio Control Bar -->
-  <header class="h-16 border-b border-stone-800 bg-[#0c0a09]/95 backdrop-blur-xl px-4 sm:px-6 flex items-center justify-between gap-4 shrink-0 z-30">
+  <header class="h-16 border-b border-stone-800/80 bg-[#070605]/95 backdrop-blur-xl px-4 sm:px-6 flex items-center justify-between gap-4 shrink-0 z-30">
     <div class="flex items-center gap-3 shrink-0">
-      <div class="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold text-xs">
-        NC
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500/30 to-purple-600/30 border border-white/15 flex items-center justify-center text-amber-300 font-bold text-xs shadow-lg">
+        ನ
       </div>
       <div>
         <h1 class="text-xs sm:text-sm font-bold tracking-tight text-white flex items-center gap-2">
-          <span>Landing Page Theme Studio</span>
-          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">5 Concepts</span>
+          <span>Glassmorphic Theme Studio</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 font-semibold">5 Palettes</span>
         </h1>
-        <p class="text-[11px] text-stone-400 hidden sm:block">Click any theme below to preview live without clutter</p>
+        <p class="text-[11px] text-stone-400 hidden sm:block">Compare 5 distinct color palettes with supercharged glassmorphism</p>
       </div>
     </div>
 
-    <!-- Theme Tabs Switcher -->
-    <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+    <!-- Theme Tabs Switcher: 5 DISTINCT GLASSMORPHIC PALETTES -->
+    <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+      
+      <!-- Option 1: Molten Gold & Obsidian -->
       <button 
-        onclick="switchTheme('theme-curated-showcase.html', this)"
-        class="theme-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap bg-amber-500 text-stone-950 shadow-md ring-1 ring-amber-400/50 flex items-center gap-1.5"
-        data-title="✨ Premier: Curated Cultural Showcase (Recommended)"
-        data-desc="Rich, cinematic architectural photography of Seshadri Iyer Memorial Library & Shanthi Nagar studios with interactive 3-category switcher and Cubbon loop trail ribbon. Neither simple nor cluttered."
+        onclick="switchTheme('showcase-1-amber-noir.html', this)"
+        class="theme-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap bg-amber-500 text-stone-950 shadow-lg shadow-amber-500/25 ring-1 ring-amber-400/50 flex items-center gap-2"
+        data-title="Option 1: Molten Gold & Obsidian Glass"
+        data-desc="Deep obsidian (#080706) with warm amber gold refraction (#f59e0b), smoked multi-layer glass cards, and cognac lighting. Luxurious, warm, and inviting."
       >
-        <span>✨ Curated Showcase</span>
-        <span class="text-[10px] px-1 py-0.2 rounded bg-black/20 font-bold">New</span>
+        <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_#f59e0b]"></span>
+        <span>1. Molten Gold</span>
       </button>
 
+      <!-- Option 2: Cubbon Emerald & Jade -->
       <button 
-        onclick="switchTheme('theme-1-architectural.html', this)"
-        class="theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800"
-        data-title="Theme 1: Architectural Minimal"
-        data-desc="Spacious Monocle-style editorial journal with warm espresso noir and parchment. Single featured spotlight replaces cluttered text boxes."
+        onclick="switchTheme('showcase-2-cubbon-emerald.html', this)"
+        class="theme-tab px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800 flex items-center gap-2"
+        data-title="Option 2: Cubbon Emerald & Jade Mist Glass"
+        data-desc="Rainforest night (#040f0a) with luminous botanical emerald (#10b981) and jade mist refraction. Honors Bengaluru’s Garden City tree canopy."
       >
-        1. Architectural Minimal
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]"></span>
+        <span>2. Cubbon Emerald</span>
       </button>
 
+      <!-- Option 3: Twilight Jacaranda & Amethyst -->
       <button 
-        onclick="switchTheme('theme-2-sunlit-glass.html', this)"
-        class="theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800"
-        data-title="Theme 2: Sunlit Daylight Glass"
-        data-desc="Luminous Apple VisionOS daylight glassmorphism. Alabaster foundation with soft jacaranda and emerald refraction. Clean, airy and breathing room."
+        onclick="switchTheme('showcase-3-twilight-jacaranda.html', this)"
+        class="theme-tab px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800 flex items-center gap-2"
+        data-title="Option 3: Twilight Jacaranda & Amethyst Glass"
+        data-desc="Deep indigo twilight (#080712) with Bengaluru Jacaranda violet blooms (#c084fc), amethyst glass halos, and neon magenta specular glints."
       >
-        2. Sunlit Daylight Glass
+        <span class="w-2.5 h-2.5 rounded-full bg-purple-400 shadow-[0_0_8px_#c084fc]"></span>
+        <span>3. Twilight Jacaranda</span>
       </button>
 
+      <!-- Option 4: Aurora Cyan & Sapphire -->
       <button 
-        onclick="switchTheme('theme-3-swiss-cartography.html', this)"
-        class="theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800"
-        data-title="Theme 3: Swiss Cartography"
-        data-desc="High-contrast technical Swiss modernism. Pure black with electric orange accents, architectural grid lines, and technical coordinate sectors."
+        onclick="switchTheme('showcase-4-aurora-cyan.html', this)"
+        class="theme-tab px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800 flex items-center gap-2"
+        data-title="Option 4: Aurora Cyan & Arctic Sapphire Glass"
+        data-desc="Deep marine space (#040914) with electric aurora cyan (#22d3ee), crystalline ice borders, and high-refraction spatial glass."
       >
-        3. Swiss Cartography
+        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span>
+        <span>4. Aurora Cyan</span>
       </button>
 
+      <!-- Option 5: Crimson Pompeiian & Terracotta -->
       <button 
-        onclick="switchTheme('theme-4-botanical-canopy.html', this)"
-        class="theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800"
-        data-title="Theme 4: Botanical Canopy"
-        data-desc="Bengaluru Garden City heritage. Deep rain-forest moss night with crimson colonial brick accents and serene literary pacing."
+        onclick="switchTheme('showcase-5-crimson-noir.html', this)"
+        class="theme-tab px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800 flex items-center gap-2"
+        data-title="Option 5: Crimson Pompeiian & Terracotta Glass"
+        data-desc="Deep wine obsidian (#0d0507) with iconic Pompeiian red (#f43f5e), Mysore terracotta ember glows, and warm architectural brick glass."
       >
-        4. Botanical Canopy
+        <span class="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_8px_#f43f5e]"></span>
+        <span>5. Crimson Pompeiian</span>
       </button>
 
-      <button 
-        onclick="switchTheme('theme-5-luminescent-dark.html', this)"
-        class="theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800"
-        data-title="Theme 5: Luminescent Dark Glass"
-        data-desc="Refined dark glassmorphic slabs with prismatic edge glows. Deep obsidian foundation with fluid spatial cards."
-      >
-        5. Luminescent Dark Glass
-      </button>
     </div>
 
     <!-- Actions: Open full-screen in new tab & Responsive toggle -->
     <div class="flex items-center gap-2 shrink-0">
       <a 
         id="fullscreen-link"
-        href="/themes/theme-curated-showcase.html"
+        href="/themes/showcase-1-amber-noir.html"
         target="_blank"
         rel="noopener noreferrer"
-        class="px-3 py-1.5 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-800 text-xs font-mono text-stone-300 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5"
-        title="Open active theme full-screen in a new tab"
+        class="px-3.5 py-1.5 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-800 text-xs font-mono text-stone-300 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5"
+        title="Open active theme standalone in a new tab"
       >
         <span>Open Standalone &nearr;</span>
       </a>
@@ -117,25 +119,28 @@
   </header>
 
   <!-- Context Sub-Bar (Explaining active theme's philosophy) -->
-  <div class="bg-stone-950 px-6 py-2 border-b border-stone-800/80 flex items-center justify-between text-xs font-mono text-stone-400 shrink-0">
+  <div class="bg-stone-950 px-6 py-2.5 border-b border-stone-800/80 flex items-center justify-between text-xs font-mono text-stone-400 shrink-0">
     <div class="flex items-center gap-3">
-      <span id="theme-title" class="text-white font-semibold font-sans">✨ Premier: Curated Cultural Showcase</span>
+      <span id="theme-title" class="text-white font-semibold font-sans">Option 1: Molten Gold & Obsidian Glass</span>
       <span class="text-stone-600">•</span>
-      <span id="theme-desc" class="text-stone-400 font-sans truncate max-w-2xl">
-        Rich, cinematic architectural photography of Seshadri Iyer Memorial Library & Shanthi Nagar studios with interactive 3-category switcher and Cubbon loop trail ribbon.
+      <span id="theme-desc" class="text-stone-300 font-sans truncate max-w-3xl">
+        Deep obsidian (#080706) with warm amber gold refraction (#f59e0b), smoked multi-layer glass cards, and cognac lighting. Luxurious, warm, and inviting.
       </span>
     </div>
-    <div class="hidden md:flex items-center gap-2 text-stone-500 text-[11px]">
-      <span>Click any theme button above to switch</span>
+    <div class="hidden lg:flex items-center gap-3 text-stone-400 text-[11px]">
+      <span class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Dev Server Running</span>
+      </span>
     </div>
   </div>
 
   <!-- Live Interactive Preview Iframe Canvas -->
   <main class="flex-1 w-full h-full relative bg-black flex items-center justify-center p-2 sm:p-4">
-    <div id="preview-wrapper" class="w-full h-full rounded-2xl overflow-hidden border border-stone-800/80 shadow-2xl transition-all duration-300 bg-[#0c0a09]">
+    <div id="preview-wrapper" class="w-full h-full rounded-2xl overflow-hidden border border-stone-800/80 shadow-2xl transition-all duration-300 bg-[#080706]">
       <iframe 
         id="preview-iframe"
-        src="/themes/theme-curated-showcase.html"
+        src="/themes/showcase-1-amber-noir.html"
         class="w-full h-full border-0"
         title="Theme Preview"
       ></iframe>
@@ -151,11 +156,25 @@
       // Update standalone link
       document.getElementById('fullscreen-link').href = '/themes/' + url;
 
-      // Update active button styles
+      // Reset all buttons
       document.querySelectorAll('.theme-tab').forEach(tab => {
-        tab.className = 'theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800';
+        tab.className = 'theme-tab px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800 flex items-center gap-2';
       });
-      button.className = 'theme-tab px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer whitespace-nowrap bg-stone-100 text-stone-950 font-semibold shadow-sm';
+
+      // Highlight active button based on theme
+      if (url.includes('amber')) {
+        button.className = 'theme-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap bg-amber-500 text-stone-950 shadow-lg shadow-amber-500/25 ring-1 ring-amber-400/50 flex items-center gap-2';
+      } else if (url.includes('emerald')) {
+        button.className = 'theme-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap bg-emerald-500 text-stone-950 shadow-lg shadow-emerald-500/25 ring-1 ring-emerald-400/50 flex items-center gap-2';
+      } else if (url.includes('jacaranda')) {
+        button.className = 'theme-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap bg-purple-500 text-white shadow-lg shadow-purple-500/25 ring-1 ring-purple-400/50 flex items-center gap-2';
+      } else if (url.includes('cyan')) {
+        button.className = 'theme-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap bg-cyan-400 text-stone-950 shadow-lg shadow-cyan-500/25 ring-1 ring-cyan-300/50 flex items-center gap-2';
+      } else if (url.includes('crimson')) {
+        button.className = 'theme-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap bg-rose-600 text-white shadow-lg shadow-rose-600/25 ring-1 ring-rose-400/50 flex items-center gap-2';
+      } else {
+        button.className = 'theme-tab px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap bg-stone-100 text-stone-950 shadow-sm flex items-center gap-2';
+      }
 
       // Update info banner
       document.getElementById('theme-title').textContent = button.dataset.title;

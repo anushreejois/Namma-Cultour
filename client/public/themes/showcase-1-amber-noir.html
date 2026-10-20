@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme 1: Molten Gold & Obsidian Glass — Namma Cultour</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #080706;
+      color: #fdfaf4;
+    }
+    .font-serif {
+      font-family: 'Playfair Display', serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Ultra Glassmorphic Tokens */
+    .glass-molten {
+      background: linear-gradient(135deg, rgba(30, 24, 18, 0.65) 0%, rgba(18, 14, 11, 0.75) 100%);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      box-shadow: 
+        0 30px 60px -12px rgba(0, 0, 0, 0.85),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -1px 1px 0 rgba(0, 0, 0, 0.4);
+    }
+    .glass-molten-card {
+      background: linear-gradient(145deg, rgba(36, 29, 21, 0.5) 0%, rgba(20, 16, 12, 0.65) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(245, 158, 11, 0.15);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-molten-card:hover {
+      background: linear-gradient(145deg, rgba(48, 38, 26, 0.75) 0%, rgba(28, 22, 16, 0.85) 100%);
+      border-color: rgba(245, 158, 11, 0.5);
+      transform: translateY(-3px);
+      box-shadow: 
+        0 20px 45px -10px rgba(0, 0, 0, 0.8),
+        0 0 25px rgba(245, 158, 11, 0.18),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-black relative overflow-x-hidden">
+
+  <!-- Glowing Molten Amber Glass Mesh Foundation -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute -top-32 left-1/5 w-[650px] h-[600px] rounded-full bg-gradient-to-br from-amber-500/20 via-orange-600/15 to-transparent blur-[140px]"></div>
+    <div class="absolute top-1/3 -right-20 w-[550px] h-[550px] rounded-full bg-gradient-to-tr from-amber-600/15 via-yellow-500/10 to-transparent blur-[150px]"></div>
+    <div class="absolute -bottom-40 left-10 w-[600px] h-[600px] rounded-full bg-gradient-to-t from-orange-800/15 via-amber-900/10 to-transparent blur-[160px]"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto w-full px-5 sm:px-8 py-6 sm:py-8 flex-1 flex flex-col justify-between">
+    
+    <!-- 1. FLOATING GLASS HEADER -->
+    <header class="flex items-center justify-between p-3.5 px-6 rounded-2xl glass-molten">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500/30 to-amber-900/40 border border-amber-500/40 flex items-center justify-center shadow-lg shadow-amber-500/20">
+          <span class="text-amber-400 font-serif font-bold text-sm drop-shadow">ನ</span>
+        </div>
+        <div>
+          <span class="font-serif text-lg font-bold tracking-tight text-white">ನಮ್ಮ Cultour</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 ml-2 font-medium">MOLTEN GOLD & NOIR</span>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_#f59e0b]"></span>
+        <span class="text-xs font-mono text-stone-300">36 Curated Spaces • High Glassmorphism</span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="/#map" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-stone-950 font-sans font-bold text-xs tracking-wide transition-all shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 cursor-pointer flex items-center gap-2 hover:scale-[1.02]">
+          <span>Enter Live Atlas</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- 2. MAIN HERO SECTION -->
+    <main class="py-10 sm:py-14 space-y-12">
+      
+      <!-- Headline + Manifesto Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
+        <div class="lg:col-span-8 space-y-5">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-[11px] font-mono text-amber-300 backdrop-blur-xl shadow-inner">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
+            <span>CIVIC CARTOGRAPHY • OBSIDIAN GLASS EDITION</span>
+          </div>
+
+          <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal leading-[1.12] text-stone-100 tracking-tight">
+            Where Bengaluru’s <span class="italic text-amber-400 font-normal underline decoration-amber-500/40 underline-offset-8">literary memory</span> & courtyard studios come alive.
+          </h1>
+
+          <p class="text-sm sm:text-base text-stone-300/80 font-light leading-relaxed max-w-2xl">
+            From the crimson Victorian brick colonnades of Seshadri Iyer Memorial to hidden artist-run residencies in Shanthi Nagar and Church Street book nooks—an independent, curated atlas built for walkers and culture lovers.
+          </p>
+        </div>
+
+        <!-- CTA & Quick Stats -->
+        <div class="lg:col-span-4 flex flex-col gap-4">
+          <div class="flex items-center gap-3">
+            <a href="/#map" class="flex-1 py-3.5 px-6 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-stone-950 font-bold text-sm transition-all shadow-xl shadow-amber-500/20 text-center cursor-pointer hover:translate-y-[-1px]">
+              Explore Interactive Map &rarr;
+            </a>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center text-xs font-mono p-3 rounded-2xl glass-molten">
+            <div>
+              <span class="block text-amber-200 font-bold text-sm">36</span>
+              <span class="text-[10px] text-stone-400 uppercase">Spaces</span>
+            </div>
+            <div class="border-x border-amber-500/20">
+              <span class="block text-amber-400 font-bold text-sm">1.8 KM</span>
+              <span class="text-[10px] text-stone-400 uppercase">Trail</span>
+            </div>
+            <div>
+              <span class="block text-stone-100 font-bold text-sm">Free</span>
+              <span class="text-[10px] text-stone-400 uppercase">Access</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. INTERACTIVE 3-TAB SPOTLIGHT CAROUSEL -->
+      <section class="space-y-4">
+        
+        <!-- Category Tab Buttons -->
+        <div class="flex items-center justify-between flex-wrap gap-3 pb-2 border-b border-amber-500/20">
+          <div class="flex items-center gap-2">
+            <button 
+              onclick="showSpotlight('library', this)"
+              class="spotlight-tab px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-gradient-to-r from-amber-400 to-amber-500 text-stone-950 shadow-lg shadow-amber-500/25 flex items-center gap-2"
+            >
+              <span>🏛️ Flagship Heritage</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-black/20 text-stone-900 font-mono font-bold">11</span>
+            </button>
+            <button 
+              onclick="showSpotlight('studio', this)"
+              class="spotlight-tab px-4 py-2.5 rounded-xl text-xs font-medium transition-all cursor-pointer glass-molten-card text-stone-300 hover:text-white flex items-center gap-2"
+            >
+              <span>🎨 Courtyard Residencies</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-500/10 text-amber-400 font-mono">14</span>
+            </button>
+            <button 
+              onclick="showSpotlight('bookstore', this)"
+              class="spotlight-tab px-4 py-2.5 rounded-xl text-xs font-medium transition-all cursor-pointer glass-molten-card text-stone-300 hover:text-white flex items-center gap-2"
+            >
+              <span>📚 Storied Reading Rooms</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-500/10 text-amber-400 font-mono">11</span>
+            </button>
+          </div>
+
+          <span class="text-xs font-mono text-amber-400/80 hidden sm:block">
+            Glass Refractive Spotlight
+          </span>
+        </div>
+
+        <!-- SPOTLIGHT PANEL 1: State Central Library -->
+        <div id="spotlight-library" class="spotlight-card rounded-3xl overflow-hidden glass-molten grid grid-cols-1 lg:grid-cols-12 transition-all duration-300">
+          <div class="lg:col-span-7 relative h-72 sm:h-96 lg:h-[430px] overflow-hidden group">
+            <img 
+              src="/images/seshadri-library.jpg" 
+              alt="State Central Library Seshadri Iyer Memorial Cubbon Park" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#080706] via-transparent to-black/20"></div>
+            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono text-stone-300">
+              <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-xl border border-amber-500/30 text-amber-300">Cubbon Park Bamboo Canopy</span>
+              <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-xl border border-white/10">12.9754° N, 77.5929° E</span>
+            </div>
+          </div>
+          <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase font-bold">
+                  Public Archive • Est. 1915
+                </span>
+                <span class="text-xs font-mono text-stone-400">Cubbon Metro (400m)</span>
+              </div>
+              <h3 class="font-serif text-2xl sm:text-3xl font-bold text-stone-100 leading-snug">
+                State Central Library (Seshadri Iyer Memorial)
+              </h3>
+              <p class="text-xs text-amber-400 font-medium mt-1">
+                ಶೇಷಾದ್ರಿ ಅಯ್ಯರ್ ಸ್ಮಾರಕ ಗ್ರಂಥಾಲಯ
+              </p>
+              <p class="text-xs sm:text-sm text-stone-300 leading-relaxed font-light mt-3">
+                Centennial crimson-red brick landmark nestled inside the lush rain-washed Cubbon Park grove. Houses over 300,000 reference volumes, rare dewan papers, and regional literature archives.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-amber-500/20 space-y-3">
+              <div class="grid grid-cols-2 gap-3 text-[11px] font-mono text-stone-300">
+                <div class="p-3 rounded-xl glass-molten-card">
+                  <span class="block text-amber-400 text-[10px] uppercase font-bold">Hours</span>
+                  <span class="text-stone-100 font-medium">08:30 AM – 07:30 PM</span>
+                </div>
+                <div class="p-3 rounded-xl glass-molten-card">
+                  <span class="block text-amber-400 text-[10px] uppercase font-bold">Entry</span>
+                  <span class="text-amber-200 font-medium">Free Public Access</span>
+                </div>
+              </div>
+
+              <a href="/#map" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-stone-950 font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-amber-500/20 cursor-pointer">
+                <span>View on Live Map Canvas</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- SPOTLIGHT PANEL 2: 1Shanthiroad -->
+        <div id="spotlight-studio" class="spotlight-card rounded-3xl overflow-hidden glass-molten grid grid-cols-1 lg:grid-cols-12 transition-all duration-300 hidden">
+          <div class="lg:col-span-7 relative h-72 sm:h-96 lg:h-[430px] overflow-hidden group">
+            <img 
+              src="/images/courtyard-art.jpg" 
+              alt="Bengaluru Courtyard Artist Studio in Shanthi Nagar" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#080706] via-transparent to-black/20"></div>
+            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono text-stone-300">
+              <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-xl border border-amber-500/30 text-amber-300">Shanthi Nagar Open-Air Lofts</span>
+              <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-xl border border-white/10">12.9582° N, 77.5956° E</span>
+            </div>
+          </div>
+          <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase font-bold">
+                  Independent Residency • Est. 2003
+                </span>
+                <span class="text-xs font-mono text-stone-400">Lalbagh Metro (1.1km)</span>
+              </div>
+              <h3 class="font-serif text-2xl sm:text-3xl font-bold text-stone-100 leading-snug">
+                1Shanthiroad Studio Gallery
+              </h3>
+              <p class="text-xs text-amber-400 font-medium mt-1">
+                ಶಾಂತಿ ರೋಡ್ ಸ್ಟುಡಿಯೋ ಗ್ಯಾಲರಿ
+              </p>
+              <p class="text-xs sm:text-sm text-stone-300 leading-relaxed font-light mt-3">
+                Courtyard artist residency and non-profit space created by Suresh Jayaram. Features an open terracotta veranda shaded by frangipani trees where painters, printmakers, and writers converse over chai.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-amber-500/20 space-y-3">
+              <div class="grid grid-cols-2 gap-3 text-[11px] font-mono text-stone-300">
+                <div class="p-3 rounded-xl glass-molten-card">
+                  <span class="block text-amber-400 text-[10px] uppercase font-bold">Hours</span>
+                  <span class="text-stone-100 font-medium">11:00 AM – 07:00 PM</span>
+                </div>
+                <div class="p-3 rounded-xl glass-molten-card">
+                  <span class="block text-amber-400 text-[10px] uppercase font-bold">Entry</span>
+                  <span class="text-amber-200 font-medium">Free Access</span>
+                </div>
+              </div>
+
+              <a href="/#map" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-stone-950 font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-amber-500/20 cursor-pointer">
+                <span>View on Live Map Canvas</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- SPOTLIGHT PANEL 3: Book Archives -->
+        <div id="spotlight-bookstore" class="spotlight-card rounded-3xl overflow-hidden glass-molten grid grid-cols-1 lg:grid-cols-12 transition-all duration-300 hidden">
+          <div class="lg:col-span-7 relative h-72 sm:h-96 lg:h-[430px] overflow-hidden group">
+            <img 
+              src="/images/reading-room.jpg" 
+              alt="Historic Church Street Bookstore and Reading Room" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#080706] via-transparent to-black/20"></div>
+            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono text-stone-300">
+              <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-xl border border-amber-500/30 text-amber-300">Church Street & MG Road</span>
+              <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-xl border border-white/10">12.9748° N, 77.6080° E</span>
+            </div>
+          </div>
+          <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase font-bold">
+                  Literary Sanctuary • Church Street
+                </span>
+                <span class="text-xs font-mono text-stone-400">MG Road Metro (200m)</span>
+              </div>
+              <h3 class="font-serif text-2xl sm:text-3xl font-bold text-stone-100 leading-snug">
+                Bengaluru Book Archives & Reading Nooks
+              </h3>
+              <p class="text-xs text-amber-400 font-medium mt-1">
+                ಬೆಂಗಳೂರು ಪುಸ್ತಕ ಗ್ಯಾಲರಿ
+              </p>
+              <p class="text-xs sm:text-sm text-stone-300 leading-relaxed font-light mt-3">
+                Towering teak bookshelves holding over half a million rare regional monographs, translated fiction, and second-hand classics. The intellectual breathing room of the city for over three decades.
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-amber-500/20 space-y-3">
+              <div class="grid grid-cols-2 gap-3 text-[11px] font-mono text-stone-300">
+                <div class="p-3 rounded-xl glass-molten-card">
+                  <span class="block text-amber-400 text-[10px] uppercase font-bold">Hours</span>
+                  <span class="text-stone-100 font-medium">10:30 AM – 09:00 PM</span>
+                </div>
+                <div class="p-3 rounded-xl glass-molten-card">
+                  <span class="block text-amber-400 text-[10px] uppercase font-bold">Entry</span>
+                  <span class="text-amber-200 font-medium">Free Browsing</span>
+                </div>
+              </div>
+
+              <a href="/#map" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-stone-950 font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-amber-500/20 cursor-pointer">
+                <span>View on Live Map Canvas</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 4. CUBBON WALKING LOOP CIRCUIT -->
+      <section class="p-6 sm:p-8 rounded-3xl glass-molten space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="px-3 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-mono text-xs font-bold border border-amber-500/40 shadow-xs">1.8 KM PEDESTRIAN CIRCUIT</span>
+              <span class="text-xs text-stone-400 font-mono">~25 Min Walk</span>
+            </div>
+            <h2 class="font-serif text-2xl font-bold text-stone-100">
+              The Cubbon Park Heritage Loop
+            </h2>
+            <p class="text-xs sm:text-sm text-stone-400 font-light">
+              Bangalore's finest self-guided architectural walking circuit through 1860s neoclassical monuments.
+            </p>
+          </div>
+
+          <a href="/#map" class="px-5 py-2.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-200 font-semibold text-xs flex items-center gap-2 transition-all shadow-xs">
+            <span>Follow Live Trail on Map</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-2">
+          
+          <div class="p-4 rounded-2xl glass-molten-card group cursor-pointer">
+            <span class="text-[10px] font-mono text-amber-400 font-bold block mb-1">STOP 01 • START</span>
+            <h4 class="font-serif font-bold text-sm text-stone-100 group-hover:text-amber-300 transition-colors">
+              State Central Library
+            </h4>
+            <p class="text-[11px] text-stone-400 mt-1 leading-relaxed">
+              Crimson Victorian hall with 300K archives inside the bamboo canopy.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl glass-molten-card group cursor-pointer">
+            <span class="text-[10px] font-mono text-amber-400 font-bold block mb-1">STOP 02 • 350M</span>
+            <h4 class="font-serif font-bold text-sm text-stone-100 group-hover:text-amber-300 transition-colors">
+              High Court (Attara Kacheri)
+            </h4>
+            <p class="text-[11px] text-stone-400 mt-1 leading-relaxed">
+              Neoclassical two-storied red brick heritage landmark built in 1868.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl glass-molten-card group cursor-pointer">
+            <span class="text-[10px] font-mono text-amber-400 font-bold block mb-1">STOP 03 • 700M</span>
+            <h4 class="font-serif font-bold text-sm text-stone-100 group-hover:text-amber-300 transition-colors">
+              Government Museum (1877)
+            </h4>
+            <p class="text-[11px] text-stone-400 mt-1 leading-relaxed">
+              Karnataka’s oldest museum housing ancient Halmidi Kannada inscriptions.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl glass-molten-card group cursor-pointer">
+            <span class="text-[10px] font-mono text-amber-400 font-bold block mb-1">STOP 04 • 1.2KM</span>
+            <h4 class="font-serif font-bold text-sm text-stone-100 group-hover:text-amber-300 transition-colors">
+              Venkatappa Art Gallery
+            </h4>
+            <p class="text-[11px] text-stone-400 mt-1 leading-relaxed">
+              Modernist five-story archive dedicated to K. Venkatappa & KK Hebbar.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 5. FOOTER -->
+    <footer class="pt-8 border-t border-amber-500/15 flex items-center justify-between text-xs text-stone-400 font-mono flex-wrap gap-4">
+      <div>ನಮ್ಮ Cultour — Molten Gold & Obsidian Edition.</div>
+      <div class="flex items-center gap-4">
+        <a href="/#map" class="hover:text-amber-300 transition-colors">Live Map Canvas</a>
+        <a href="/themes/index.html" class="hover:text-amber-300 transition-colors">Theme Studio</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    function showSpotlight(type, button) {
+      document.querySelectorAll('.spotlight-card').forEach(card => card.classList.add('hidden'));
+      const target = document.getElementById('spotlight-' + type);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.spotlight-tab').forEach(tab => {
+        tab.className = 'spotlight-tab px-4 py-2.5 rounded-xl text-xs font-medium transition-all cursor-pointer glass-molten-card text-stone-300 hover:text-white flex items-center gap-2';
+      });
+      button.className = 'spotlight-tab px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer bg-gradient-to-r from-amber-400 to-amber-500 text-stone-950 shadow-lg shadow-amber-500/25 flex items-center gap-2';
+    }
+  </script>
+
+</body>
+</html>
